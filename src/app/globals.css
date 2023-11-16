@@ -112,6 +112,18 @@
     text-decoration: none;
   }
 
+  #screen-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #screen-title button {
+    border-radius: 5px;
+    padding: 0.25rem;
+    cursor: pointer;
+  }
+
   .track-display {
     display: flex;
     flex-wrap: wrap;

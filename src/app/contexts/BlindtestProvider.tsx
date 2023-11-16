@@ -1,4 +1,5 @@
-import { ReactNode, createContext, useContext } from "react";
+import { Dispatch, ReactNode, SetStateAction, createContext, useContext } from "react";
+import { ScreenSelection } from "../types/ScreenSelection";
 
 const BlindtestContext = createContext<BlindtestContextType | null>(null);
 
@@ -12,9 +13,9 @@ function useBlindtestContext() {
   return value;
 };
 
-function BlindtestProvider({ children, score, lives, increaseScore, loseLife }: BlindtestProviderProps) {
+function BlindtestProvider({ children, score, lives, screenSelection, increaseScore, loseLife, setScreenSelection }: BlindtestProviderProps) {
   return (
-    <BlindtestContext.Provider value={{ score, lives, increaseScore, loseLife }}>
+    <BlindtestContext.Provider value={{ score, lives, screenSelection, increaseScore, loseLife, setScreenSelection }}>
       {children}
     </BlindtestContext.Provider>
   );
@@ -23,8 +24,10 @@ function BlindtestProvider({ children, score, lives, increaseScore, loseLife }: 
 type BlindtestContextType = {
   score: number;
   lives: number;
+  screenSelection: ScreenSelection;
   increaseScore: (increase: number) => void;
   loseLife: () => void;
+  setScreenSelection: Dispatch<SetStateAction<ScreenSelection>>;
 };
 
 type BlindtestProviderProps = {
