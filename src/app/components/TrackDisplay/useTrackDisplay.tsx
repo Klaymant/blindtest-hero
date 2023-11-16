@@ -3,9 +3,10 @@ import { CONFIG } from "@/app/config";
 import { DeezerApiFetcher } from "@/app/services/DeezerApiFetcher";
 import { Track } from "@/app/types/Track";
 import { Randomizer } from "@/app/utils/Randomizer";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 function useTrackDisplay() {
+  const [loading, setLoading] = useState(false);
   const [tracks, setTracks] = useState<Track[]>([]);
   const [chosenTrack, setChosenTrack] = useState<Track>();
   const [trackFlag, setTrackFlag] = useState(false);
@@ -15,12 +16,16 @@ function useTrackDisplay() {
     const randomIndexes = Randomizer.generateNbs(CONFIG.nbTracksToGuess, CONFIG.maxTrackIndex);
     const tracksPromises = randomIndexes.map((index) => retrieveRandomTrack(index));
 
+    setLoading(true);
     Promise.all(tracksPromises)
       .then((randomTracks) => {
         setTracks([ ...tracks, ...randomTracks.filter(Boolean) ]);
       })
       .catch((error) => {
         console.error(error);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, [trackFlag]);
 
@@ -56,6 +61,7 @@ function useTrackDisplay() {
   return {
     tracks,
     chosenTrack,
+    loading,
     regenerateTracks,
   };
 }

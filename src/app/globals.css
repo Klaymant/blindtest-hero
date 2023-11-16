@@ -136,4 +136,42 @@
     font-weight: 600;
     color: var(--primary);
   }
+
+  .fail {
+    animation: fail 1s ease-in-out 1;
+  }
+
+  .win {
+    animation: win 1s ease-in-out 1;
+  }
+
+  .success {
+    animation: success 1s ease-in-out 1;
+  }
+
+  @keyframes success {
+    0% { background-color: green }
+  }
+
+  @keyframes fail {
+    0% { transform: translateX(0px); background-color: red; }
+    25% { transform: translateX(5px) }
+    50% { transform: translateX(-5px); }
+    75% { transform: translateX(5px) }
+    100% { transform: translateX(0px); }
+  }
+
+  @keyframes horizontal-shaking {
+    0% { transform: translateX(0) }
+    25% { transform: translateX(5px) }
+    50% { transform: translateX(-5px) }
+    75% { transform: translateX(5px) }
+    100% { transform: translateX(0) }
+   }
+
+  @keyframes win {
+    0% { border: 0 }
+    50% { border: solid 2px green }
+    100% { border: 0 }
+  }
 }
