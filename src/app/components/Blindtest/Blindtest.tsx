@@ -12,11 +12,11 @@ function Blindtest() {
   const [screenSelection, setScreenSelection] = useState<ScreenSelection>('home');
 
   function increaseScore(increase: number) {
-    setScore(score + increase);
+    setScore((prev) => prev + increase);
   }
 
   function loseLife() {
-    setLives(lives - 1);
+    setLives((prev) => prev - 1);
   }
 
   return (

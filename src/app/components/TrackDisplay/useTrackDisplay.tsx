@@ -14,9 +14,13 @@ function useTrackDisplay() {
   const [audioPreview, setAudioPreview] = useState<HTMLAudioElement>();
 
   useEffect(() => {
-    Promise.all(tracksPromises).then((randomTracks) => {
-      setTracks([ ...tracks, ...randomTracks ]);
-    });
+    Promise.all(tracksPromises)
+      .then((randomTracks) => {
+        setTracks([ ...tracks, ...randomTracks.filter(Boolean) ]);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }, [trackFlag]);
 
   useEffect(() => {
