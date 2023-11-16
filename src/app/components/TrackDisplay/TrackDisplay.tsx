@@ -5,14 +5,16 @@ import { useBlindtestContext } from "@/app/contexts/BlindtestProvider";
 
 export default function TrackDisplay() {
   const { tracks, chosenTrack, regenerateTracks } = useTrackDisplay();
-  const { increaseScore, loseLife } = useBlindtestContext();
+  const { increaseScore, loseLife, setScreenSelection, lives } = useBlindtestContext();
 
   function guessTrack(trackId: number) {
     return function() {
       if (trackId === chosenTrack?.id)
         increaseScore(100);
-      else
+      else if (lives > 1)
         loseLife();
+      else
+        setScreenSelection('game-over');
       regenerateTracks();
     }
   }

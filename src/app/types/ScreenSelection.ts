@@ -1,1 +1,1 @@
-export type ScreenSelection = 'home' | 'game' | 'end';
+export type ScreenSelection = 'home' | 'game' | 'game-over';
