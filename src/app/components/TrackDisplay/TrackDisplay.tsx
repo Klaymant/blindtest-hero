@@ -28,13 +28,13 @@ export default function TrackDisplay() {
   return (
     <section className="track-display">
       {tracks.map((track) => (
-        <div key={track.id} onClick={guessTrack(track.id)}>
+        <button key={track.id} onClick={guessTrack(track.id)}>
           <img src={track.album.cover_medium} alt={getCoverAltText(track)} />
           <p>
             {shortenTrackTitle(track.title)}<br/>
             {track.artist.name}
           </p>
-        </div>
+        </button>
       ))}
     </section>
   );
