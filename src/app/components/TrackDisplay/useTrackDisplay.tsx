@@ -3,17 +3,18 @@ import { CONFIG } from "@/app/config";
 import { DeezerApiFetcher } from "@/app/services/DeezerApiFetcher";
 import { Track } from "@/app/types/Track";
 import { Randomizer } from "@/app/utils/Randomizer";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function useTrackDisplay() {
   const [tracks, setTracks] = useState<Track[]>([]);
   const [chosenTrack, setChosenTrack] = useState<Track>();
-  const randomIndexes = Randomizer.generateNbs(CONFIG.nbTracksToGuess, CONFIG.maxTrackIndex);
-  const tracksPromises = randomIndexes.map((index) => retrieveRandomTrack(index));
   const [trackFlag, setTrackFlag] = useState(false);
   const [audioPreview, setAudioPreview] = useState<HTMLAudioElement>();
 
   useEffect(() => {
+    const randomIndexes = Randomizer.generateNbs(CONFIG.nbTracksToGuess, CONFIG.maxTrackIndex);
+    const tracksPromises = randomIndexes.map((index) => retrieveRandomTrack(index));
+
     Promise.all(tracksPromises)
       .then((randomTracks) => {
         setTracks([ ...tracks, ...randomTracks.filter(Boolean) ]);
@@ -24,14 +25,17 @@ function useTrackDisplay() {
   }, [trackFlag]);
 
   useEffect(() => {
-    const chosenTrackId = Math.floor(Math.random() * CONFIG.nbTracksToGuess);
-
     if (tracks.length > 0) {
-      const audioPreview = new Audio(tracks[chosenTrackId].preview);
+      const chosenTrackId = Math.floor(Math.random() * CONFIG.nbTracksToGuess);
+      const randomAudioPreview = new Audio(tracks[chosenTrackId].preview);
 
       setChosenTrack(tracks[chosenTrackId]);
-      setAudioPreview(audioPreview);
-      audioPreview.play();
+      setAudioPreview(randomAudioPreview);
+      randomAudioPreview.play();
+
+      return () => {
+        randomAudioPreview.pause();
+      };
     }
   }, [tracks]);
 
