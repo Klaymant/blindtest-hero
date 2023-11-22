@@ -123,12 +123,8 @@
     animation: fail 1s ease-in-out 1;
   }
 
-  .win {
-    animation: win 1s ease-in-out 1;
-  }
-
   .success {
-    animation: success 1s ease-in-out 1;
+    animation: switchToGreen 1s ease-in-out 1;
   }
 
   @media screen and (max-width: 500px) {
@@ -170,24 +166,37 @@
   }
 
   @keyframes fail {
-    0% { transform: translateX(0px); border-color: red; }
-    25% { transform: translateX(5px) }
-    50% { transform: translateX(-5px); }
-    75% { transform: translateX(5px) }
-    100% { transform: translateX(0px); }
+    0% {
+      transform: translateX(0px);
+      filter: brightness(0) invert(17%) sepia(91%) saturate(2957%) hue-rotate(343deg) brightness(98%) contrast(97%);
+    }
+    25% {
+      transform: translateX(5px);
+      filter: brightness(0) invert(17%) sepia(91%) saturate(2957%) hue-rotate(343deg) brightness(98%) contrast(97%);
+    }
+    50% {
+      transform: translateX(-5px);
+      filter: brightness(0) invert(17%) sepia(91%) saturate(2957%) hue-rotate(343deg) brightness(98%) contrast(97%);
+    }
+    75% {
+      transform: translateX(5px);
+      filter: brightness(0) invert(17%) sepia(91%) saturate(2957%) hue-rotate(343deg) brightness(98%) contrast(97%);
+    }
+    100% {
+      transform: translateX(0px);
+      filter: brightness(0) invert(17%) sepia(91%) saturate(2957%) hue-rotate(343deg) brightness(98%) contrast(97%);
+    }
   }
-
-  @keyframes horizontal-shaking {
-    0% { transform: translateX(0) }
-    25% { transform: translateX(5px) }
-    50% { transform: translateX(-5px) }
-    75% { transform: translateX(5px) }
-    100% { transform: translateX(0) }
-   }
 
   @keyframes win {
     0% { border: 0 }
     50% { border: solid 2px green }
     100% { border: 0 }
+  }
+
+  @keyframes switchToGreen {
+    0% {
+      filter: brightness(0) invert(69%) sepia(90%) saturate(1484%) hue-rotate(84deg) brightness(101%) contrast(105%);
+    }
   }
 }
