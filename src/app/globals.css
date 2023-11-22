@@ -1,7 +1,8 @@
 @media screen {
   :root {
-    --primary: aquamarine;
-    --secondary: blueviolet;
+    --pink-fresh: rgb(255, 0, 102);
+
+    --primary: var(--pink-fresh);
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
@@ -30,10 +31,10 @@
   }
 
   h1 {
+    margin-left: 1rem;
     font-size: 2.5rem;
     font-weight: 700;
     line-height: 1.2;
-    text-align: center;
   }
 
   h2 {
@@ -90,7 +91,7 @@
   }
 
   .track-display img {
-    border-radius: 5px;
+    border-radius: 5px 5px 0px 0px;
     max-width: 10rem;
   }
 
@@ -98,38 +99,19 @@
     color: white;
     border: 0;
     background-color: black;
-    padding: 0.25rem;
-    border-radius: 5px;
+    border: solid 3px var(--primary);
+    border-radius: 8px;
     cursor: pointer;
   }
 
-  @media screen and (max-width: 500px) {
-    .track-display {
-      flex-direction: column;
-    }
-
-    .track-display button {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      text-align: left;
-      color: white;
-      background-color: var(--secondary);
-      padding: 0.25rem;
-      border-radius: 5px;
-      margin-right: 0.5rem;
-      margin-left: 0.5rem;
-      cursor: pointer;
-    }
-
-    .track-display img {
-      max-width: 5rem;
-    }
+  .track-display button p {
+    border-radius: 0px 0px 5px 5px;
+    padding: 0.25rem;
   }
 
   #play-data {
-    text-align: center;
-    margin-bottom: 1rem;
+    margin-left: 1rem;
+    margin-bottom: 2rem;
   }
 
   #score span, #lives span {
@@ -149,12 +131,46 @@
     animation: success 1s ease-in-out 1;
   }
 
+  @media screen and (max-width: 500px) {
+    h1 {
+      text-align: center;
+    }
+
+    .track-display {
+      flex-direction: column;
+    }
+
+    .track-display button {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-align: left;
+      color: white;
+      background-color: var(--primary);
+      padding: 0;
+      border-radius: 5px;
+      margin-right: 1rem;
+      margin-left: 1rem;
+      cursor: pointer;
+    }
+
+    .track-display img {
+      border: solid 2px var(--primary);
+      border-radius: 5px 0px 0px 5px;
+      max-width: 5rem;
+    }
+
+    #play-data {
+      text-align: center;
+    }
+  }
+
   @keyframes success {
-    0% { background-color: green }
+    0% { border-color: green }
   }
 
   @keyframes fail {
-    0% { transform: translateX(0px); background-color: red; }
+    0% { transform: translateX(0px); border-color: red; }
     25% { transform: translateX(5px) }
     50% { transform: translateX(-5px); }
     75% { transform: translateX(5px) }
