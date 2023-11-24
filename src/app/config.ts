@@ -5,4 +5,8 @@ const CONFIG = {
   maxTrackIndex: 170,
 };
 
-export { CONFIG };
+const ENV_VARIABLES = {
+  env: process.env.NEXT_PUBLIC_ENV || 'dev',
+};
+
+export { CONFIG, ENV_VARIABLES };

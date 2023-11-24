@@ -44,12 +44,12 @@ function useTrackDisplay() {
     }
   }, [tracks]);
 
-  async function retrieveRandomTrack(index: number) {
+  async function retrieveRandomTrack(index: number): Promise<Track> {
     const { getTrackFromChart } = DeezerApiFetcher();
     const response = await getTrackFromChart(index);
     const data = await response.json();
 
-    return data.tracks.data[0];
+    return data;
   }
 
   function regenerateTracks() {
