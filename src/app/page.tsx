@@ -1,4 +1,3 @@
-'use client';
 import { Blindtest } from './components/Blindtest/Blindtest';
 
 export default function Home() {
