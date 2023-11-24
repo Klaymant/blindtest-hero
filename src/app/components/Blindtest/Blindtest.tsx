@@ -1,7 +1,7 @@
 'use client';
 import { BlindtestProvider } from "@/app/contexts/BlindtestProvider"
 import { ReactNode, useState } from "react";
-import { CONFIG } from "@/app/config";
+import { GAME_CONFIG } from "@/app/config";
 import { GameSession } from "../GameSession/GameSession";
 import { ScreenSelection } from "@/app/types/ScreenSelection";
 import { ScreenTitle } from "../ScreenTitle/ScreenTitle";
@@ -9,7 +9,7 @@ import { GameOver } from "../GameOver/GameOver";
 
 function Blindtest() {
   const [score, setScore] = useState(0);
-  const [lives, setLives] = useState(CONFIG.nbLives);
+  const [lives, setLives] = useState(GAME_CONFIG.nbLives);
   const [screenSelection, setScreenSelection] = useState<ScreenSelection>('home');
   const screenSelectionMap: Record<ScreenSelection, ReactNode> = {
     'home': <ScreenTitle />,
@@ -27,7 +27,7 @@ function Blindtest() {
 
   function resetGame() {
     setScore(0);
-    setLives(CONFIG.nbLives);
+    setLives(GAME_CONFIG.nbLives);
   }
 
   return (

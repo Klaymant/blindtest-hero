@@ -1,5 +1,5 @@
 'use client';
-import { CONFIG } from "@/app/config";
+import { GAME_CONFIG } from "@/app/config";
 import { DeezerApiFetcher } from "@/app/services/DeezerApiFetcher";
 import { Track } from "@/app/types/Track";
 import { Randomizer } from "@/app/utils/Randomizer";
@@ -13,7 +13,7 @@ function useTrackDisplay() {
   const [audioPreview, setAudioPreview] = useState<HTMLAudioElement>();
 
   useEffect(() => {
-    const randomIndexes = Randomizer.generateNbs(CONFIG.nbTracksToGuess, CONFIG.maxTrackIndex);
+    const randomIndexes = Randomizer.generateNbs(GAME_CONFIG.nbTracksToGuess, GAME_CONFIG.maxTrackIndex);
     const tracksPromises = randomIndexes.map((index) => retrieveRandomTrack(index));
 
     setLoading(true);
@@ -31,7 +31,7 @@ function useTrackDisplay() {
 
   useEffect(() => {
     if (tracks.length > 0) {
-      const chosenTrackId = Math.floor(Math.random() * CONFIG.nbTracksToGuess);
+      const chosenTrackId = Math.floor(Math.random() * GAME_CONFIG.nbTracksToGuess);
       const randomAudioPreview = new Audio(tracks[chosenTrackId].preview);
 
       setChosenTrack(tracks[chosenTrackId]);
