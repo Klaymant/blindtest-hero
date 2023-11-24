@@ -1,6 +1,6 @@
 'use client';
 import { GAME_CONFIG } from "@/app/config";
-import { DeezerApiFetcher } from "@/app/services/DeezerApiFetcher";
+import { TrackApiFetcher } from "@/app/services/TrackApiFetcher";
 import { Track } from "@/app/types/Track";
 import { Randomizer } from "@/app/utils/Randomizer";
 import { useEffect, useState } from "react";
@@ -45,7 +45,7 @@ function useTrackDisplay() {
   }, [tracks]);
 
   async function retrieveRandomTrack(index: number): Promise<Track> {
-    const { getTrackFromChart } = DeezerApiFetcher();
+    const { getTrackFromChart } = TrackApiFetcher();
     const response = await getTrackFromChart(index);
     const data = await response.json();
 

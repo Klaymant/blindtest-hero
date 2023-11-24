@@ -3,11 +3,11 @@ import { Env } from "../types/Env";
 
 const BACKEND_APIS: Record<Env, string> = {
   dev: 'http://localhost:8000',
-  prod: 'http://217.160.192.132/blindtest',
+  prod: 'https://blindtest-hero-backend.com',
 };
 const env = ENV_VARIABLES.env as Env;
 
-function DeezerApiFetcher() {
+function TrackApiFetcher() {
   const publicApi = {
     getTrackFromChart,
   };
@@ -19,4 +19,4 @@ function DeezerApiFetcher() {
   return publicApi;
 }
 
-export { DeezerApiFetcher };
+export { TrackApiFetcher };
