@@ -18,9 +18,11 @@ function useTrackDisplay({ soundOptions, setSoundOptions }: UseTrackDisplayParam
     const tracksPromises = randomIndexes.map((index) => retrieveRandomTrack(index));
 
     setLoading(true);
-    Promise.all(tracksPromises)
-      .then((randomTracks) => {
-        setTracks([ ...tracks, ...randomTracks.filter(Boolean) ]);
+    Promise.allSettled(tracksPromises)
+      .then((randomTracksResults) => {
+        const retrievedTracks = randomTracksResults.filter((result) => result.status === 'fulfilled') as PromiseFulfilledResult<Track>[];
+
+        setTracks([ ...tracks, ...retrievedTracks.map((result) => result.value) ]);
       })
       .catch((error) => {
         console.error(error);
@@ -32,7 +34,7 @@ function useTrackDisplay({ soundOptions, setSoundOptions }: UseTrackDisplayParam
 
   useEffect(() => {
     if (tracks.length > 0) {
-      const chosenTrackId = Math.floor(Math.random() * GAME_CONFIG.nbTracksToGuess);
+      const chosenTrackId = Math.floor(Math.random() * tracks.length);
       const randomAudioPreview = new Audio(tracks[chosenTrackId].preview);
 
       randomAudioPreview.volume = soundOptions.volume;
@@ -54,10 +56,15 @@ function useTrackDisplay({ soundOptions, setSoundOptions }: UseTrackDisplayParam
 
   async function retrieveRandomTrack(index: number): Promise<Track> {
     const { getTrackFromChart } = TrackApiFetcher();
-    const response = await getTrackFromChart(index);
-    const data = await response.json();
 
-    return data;
+    try {
+      const response = await getTrackFromChart(index);
+      const data = await response.json();
+  
+      return data;
+    } catch {
+      throw new Error('empty-track');
+    }
   }
 
   function regenerateTracks() {
