@@ -127,6 +127,21 @@
     animation: switchToGreen 1s ease-in-out 1;
   }
 
+  #audio-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 0.5rem;
+  }
+
+  #audio-controls button {
+    display: flex;
+    border: none;
+    border-radius: 4px;
+    padding: 0.25rem;
+    cursor: pointer;
+  }
+
   @media screen and (max-width: 500px) {
     h1 {
       text-align: center;
@@ -158,6 +173,10 @@
 
     #play-data {
       text-align: center;
+    }
+
+    #audio-controls {
+      justify-content: center;
     }
   }
 
