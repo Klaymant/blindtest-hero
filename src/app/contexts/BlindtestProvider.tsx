@@ -1,5 +1,6 @@
 import { Dispatch, ReactNode, SetStateAction, createContext, useContext } from "react";
 import { ScreenSelection } from "../types/ScreenSelection";
+import { SoundOptions } from "../types/SoundOptions";
 
 const BlindtestContext = createContext<BlindtestContextType | null>(null);
 
@@ -26,9 +27,11 @@ type BlindtestContextType = {
   score: number;
   lives: number;
   screenSelection: ScreenSelection;
+  soundOptions: SoundOptions;
   increaseScore: (increase: number) => void;
   loseLife: () => void;
   setScreenSelection: Dispatch<SetStateAction<ScreenSelection>>;
+  setSoundOptions: Dispatch<SetStateAction<SoundOptions>>;
   resetGame: () => void;
 };
 

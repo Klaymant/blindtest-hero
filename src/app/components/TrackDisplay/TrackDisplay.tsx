@@ -1,11 +1,11 @@
 'use client';
 import { Track } from "@/app/types/Track";
-import { useTrackDisplay } from "./useTrackDisplay";
 import { useBlindtestContext } from "@/app/contexts/BlindtestProvider";
 import { SyntheticEvent } from "react";
+import { useTracksContext } from "@/app/contexts/TracksProvider";
 
 export default function TrackDisplay() {
-  const { tracks, chosenTrack, loading, regenerateTracks } = useTrackDisplay();
+  const { tracks, chosenTrack, loading, regenerateTracks } = useTracksContext();
   const { increaseScore, loseLife, setScreenSelection, lives } = useBlindtestContext();
 
   function guessTrack(e: SyntheticEvent, trackId: number) {
@@ -36,15 +36,19 @@ export default function TrackDisplay() {
   return (
     <section className="track-display">
       {loading && <p>Loading...</p>}
-      {!loading && tracks.map((track) => (
-        <button key={track.id} onClick={(e) => guessTrack(e, track.id)}>
-          <img src={track.album.cover_medium} alt={getCoverAltText(track)} />
-          <p>
-            {shortenTrackTitle(track.title)}<br/>
-            {track.artist.name}
-          </p>
-        </button>
-      ))}
+      {!loading && (
+        <>
+          {tracks.map((track) => (
+          <button key={track.id} onClick={(e) => guessTrack(e, track.id)}>
+            <img src={track.album.cover_medium} alt={getCoverAltText(track)} />
+            <p>
+              {shortenTrackTitle(track.title)}<br/>
+              {track.artist.name}
+            </p>
+          </button>
+          ))}
+        </>
+      )}
     </section>
   );
 }

@@ -1,11 +1,12 @@
 'use client';
 import { GAME_CONFIG } from "@/app/config";
 import { TrackApiFetcher } from "@/app/services/TrackApiFetcher";
+import { SoundOptions } from "@/app/types/SoundOptions";
 import { Track } from "@/app/types/Track";
 import { Randomizer } from "@/app/utils/Randomizer";
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
-function useTrackDisplay() {
+function useTrackDisplay({ soundOptions, setSoundOptions }: UseTrackDisplayParams) {
   const [loading, setLoading] = useState(false);
   const [tracks, setTracks] = useState<Track[]>([]);
   const [chosenTrack, setChosenTrack] = useState<Track>();
@@ -34,15 +35,22 @@ function useTrackDisplay() {
       const chosenTrackId = Math.floor(Math.random() * GAME_CONFIG.nbTracksToGuess);
       const randomAudioPreview = new Audio(tracks[chosenTrackId].preview);
 
+      randomAudioPreview.volume = soundOptions.volume;
+      randomAudioPreview.muted = soundOptions.muted;
       setChosenTrack(tracks[chosenTrackId]);
       setAudioPreview(randomAudioPreview);
-      randomAudioPreview.play();
-
-      return () => {
-        randomAudioPreview.pause();
-      };
     }
   }, [tracks]);
+
+  useEffect(() => {
+    if (audioPreview) {
+      audioPreview.play();
+  
+      return function pauseAudioPreview() {
+        audioPreview.pause();
+      };
+    }
+  }, [audioPreview]);
 
   async function retrieveRandomTrack(index: number): Promise<Track> {
     const { getTrackFromChart } = TrackApiFetcher();
@@ -58,12 +66,50 @@ function useTrackDisplay() {
     setTrackFlag((prev) => !prev);
   }
 
+  function mute() {
+    if (audioPreview) {
+      const audioCopy = copyAudioElement(audioPreview);
+
+      audioCopy.muted = !audioPreview.muted;
+      setSoundOptions((prev) => ({ ...prev, muted: !audioPreview.muted }));
+      setAudioPreview(audioCopy);
+    }
+  }
+
+  function changeVolume(e: React.ChangeEvent<HTMLInputElement>) {
+    if (audioPreview) {
+      const audioCopy = copyAudioElement(audioPreview);
+
+      audioCopy.volume = e.target.valueAsNumber / 100;
+      setSoundOptions((prev) => ({ ...prev, volume: e.target.valueAsNumber / 100 }));
+      setAudioPreview(audioCopy);
+    }
+  }
+
+  function copyAudioElement(audio: HTMLAudioElement): HTMLAudioElement {
+    const audioCopy = new Audio(audio.src);
+
+    audioCopy.muted = audio.muted;
+    audioCopy.currentTime = audio.currentTime;
+    audioCopy.volume = audio.volume;
+    return audioCopy;
+  }
+
   return {
     tracks,
     chosenTrack,
     loading,
+    audioPreview,
+    changeVolume,
+    setAudioPreview,
     regenerateTracks,
+    mute,
   };
 }
+
+type UseTrackDisplayParams = {
+  soundOptions: SoundOptions;
+  setSoundOptions: Dispatch<SetStateAction<SoundOptions>>;
+};
 
 export { useTrackDisplay }

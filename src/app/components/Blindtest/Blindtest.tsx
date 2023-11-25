@@ -6,11 +6,18 @@ import { GameSession } from "../GameSession/GameSession";
 import { ScreenSelection } from "@/app/types/ScreenSelection";
 import { ScreenTitle } from "../ScreenTitle/ScreenTitle";
 import { GameOver } from "../GameOver/GameOver";
+import { SoundOptions } from "@/app/types/SoundOptions";
+
+const DEFAULT_AUDIO_PREVIEW_VOLUME = 0.3;
 
 function Blindtest() {
   const [score, setScore] = useState(0);
   const [lives, setLives] = useState(GAME_CONFIG.nbLives);
   const [screenSelection, setScreenSelection] = useState<ScreenSelection>('home');
+  const [soundOptions, setSoundOptions] = useState<SoundOptions>({
+    muted: false,
+    volume: DEFAULT_AUDIO_PREVIEW_VOLUME,
+  });
   const screenSelectionMap: Record<ScreenSelection, ReactNode> = {
     'home': <ScreenTitle />,
     'game': <GameSession />,
@@ -35,9 +42,11 @@ function Blindtest() {
       score={score}
       lives={lives}
       screenSelection={screenSelection}
+      soundOptions={soundOptions}
       increaseScore={increaseScore}
       loseLife={loseLife}
       setScreenSelection={setScreenSelection}
+      setSoundOptions={setSoundOptions}
       resetGame={resetGame}
     >
       {screenSelectionMap[screenSelection]}
