@@ -43,10 +43,15 @@
   }
 
   h1 {
-    margin-left: 1rem;
+    display: inline-block;
     font-size: 2.5rem;
     font-weight: 700;
     line-height: 1.2;
+    background-color: var(--primary);
+    border-radius: 5px;
+    padding: 0 0.5rem;
+    margin: 0.5rem 0rem;
+    margin-left: 1rem;
   }
 
   h2 {
@@ -79,7 +84,16 @@
     font-size: 2.5rem;
     padding: 1.5rem;
     cursor: pointer;
+    background: transparent;
+    border: solid 3px var(--primary);
+    color: var(--primary);
+    font-family: 'Engcomica';
+    transition: 0.2s;
+  }
+
+  #screen-title button:hover {
     background-color: var(--primary);
+    color: white;
   }
 
   #game-over {
@@ -116,12 +130,13 @@
     color: white;
     border: 0;
     background-color: black;
-    border: solid 3px var(--primary);
     border-radius: 8px;
     cursor: pointer;
   }
+    
 
   .track-display button p {
+    color: white;
     border-radius: 0px 0px 5px 5px;
     padding: 0.25rem;
   }
@@ -159,9 +174,25 @@
     cursor: pointer;
   }
 
+  @media screen and (min-width: 501px) {
+    .track-display button {
+      box-shadow: 0 0 8px 0px #636363;
+      transition: 0.3s;
+    }
+
+    .track-display button:hover {
+      box-shadow: 0 0 8px 2px var(--primary);
+    }
+  }
+
   @media screen and (max-width: 500px) {
     h1 {
       text-align: center;
+    }
+
+    #title-container {
+      display: flex;
+      justify-content: center;
     }
 
     .track-display {
