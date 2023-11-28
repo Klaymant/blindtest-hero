@@ -7,4 +7,5 @@ export type Track = {
   album: {
     cover_medium: string,
   },
+  preview: string,
 };

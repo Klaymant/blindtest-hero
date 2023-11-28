@@ -14,7 +14,8 @@ jest.mock('../../services/TrackApiFetcher.ts', () => ({
         },
         album: {
           cover_medium: 'cover',
-        }
+        },
+        preview: 'preview',
       };
   
       return new Promise((resolve) => {
