@@ -7,7 +7,7 @@ function useTracksContext() {
   const value = useContext(TracksContext);
 
   if (value === null)
-    throw new Error('No value provided');
+    throw new Error('No value provided for TracksContext');
 
   return value;
 };

@@ -8,7 +8,7 @@ function useBlindtestContext() {
   const value = useContext(BlindtestContext);
 
   if (value === null)
-    throw new Error('No value provided');
+    throw new Error('No value provided for BlindtestContext');
 
   return value;
 };
