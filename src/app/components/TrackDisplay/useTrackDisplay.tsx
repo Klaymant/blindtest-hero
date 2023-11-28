@@ -5,6 +5,7 @@ import { SoundOptions } from "@/app/types/SoundOptions";
 import { Track } from "@/app/types/Track";
 import { Randomizer } from "@/app/utils/Randomizer";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { RandomTrackGenerator } from "./RandomTrackGenerator";
 
 function useTrackDisplay({ soundOptions, setSoundOptions }: UseTrackDisplayParams) {
   const [loading, setLoading] = useState(false);
@@ -15,7 +16,7 @@ function useTrackDisplay({ soundOptions, setSoundOptions }: UseTrackDisplayParam
 
   useEffect(() => {
     const randomIndexes = Randomizer.generateNbs(GAME_CONFIG.nbTracksToGuess, GAME_CONFIG.maxTrackIndex);
-    const tracksPromises = randomIndexes.map((index) => retrieveRandomTrack(index));
+    const tracksPromises = randomIndexes.map((index) => RandomTrackGenerator.retrieveRandomTrack(index));
 
     setLoading(true);
     Promise.allSettled(tracksPromises)
@@ -53,19 +54,6 @@ function useTrackDisplay({ soundOptions, setSoundOptions }: UseTrackDisplayParam
       };
     }
   }, [audioPreview]);
-
-  async function retrieveRandomTrack(index: number): Promise<Track> {
-    const { getTrackFromChart } = TrackApiFetcher();
-
-    try {
-      const response = await getTrackFromChart(index);
-      const data = await response.json();
-  
-      return data;
-    } catch {
-      throw new Error('empty-track');
-    }
-  }
 
   function regenerateTracks() {
     setTracks([]);
