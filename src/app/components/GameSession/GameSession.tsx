@@ -9,7 +9,7 @@ import muteIcon from '../../../../public/mute.png';
 function GameSession() {
   const { score, lives, soundOptions, setSoundOptions } = useBlindtestContext();
   const {
-    tracks,
+    roundTracks,
     chosenTrack,
     loading,
     audioPreview,
@@ -21,7 +21,7 @@ function GameSession() {
   return (
     <>
       <TracksProvider
-        tracks={tracks}
+        tracks={roundTracks}
         chosenTrack={chosenTrack}
         loading={loading}
         audioPreview={audioPreview}

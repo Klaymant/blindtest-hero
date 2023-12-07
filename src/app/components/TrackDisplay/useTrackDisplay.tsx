@@ -1,51 +1,57 @@
 'use client';
 import { GAME_CONFIG } from "@/app/config";
-import { TrackApiFetcher } from "@/app/services/TrackApiFetcher";
 import { SoundOptions } from "@/app/types/SoundOptions";
 import { Track } from "@/app/types/Track";
 import { Randomizer } from "@/app/utils/Randomizer";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { RandomTrackGenerator } from "./RandomTrackGenerator";
+import { TrackApiFetcher } from "@/app/services/TrackApiFetcher";
 
 function useTrackDisplay({ soundOptions, setSoundOptions }: UseTrackDisplayParams) {
   const [loading, setLoading] = useState(false);
   const [tracks, setTracks] = useState<Track[]>([]);
+  const [roundTracks, setRoundTracks] = useState<Track[]>([]);
   const [chosenTrack, setChosenTrack] = useState<Track>();
-  const [trackFlag, setTrackFlag] = useState(false);
   const [audioPreview, setAudioPreview] = useState<HTMLAudioElement>();
+  const [nextRoundFlag, setNextRoundFlag] = useState(false);
 
-  useEffect(() => {
-    const randomIndexes = Randomizer.generateNbs(GAME_CONFIG.nbTracksToGuess, GAME_CONFIG.maxTrackIndex);
-    const tracksPromises = randomIndexes.map((index) => RandomTrackGenerator.retrieveRandomTrack(index));
-
+  useEffect(function fetchChartTracks() {
     setLoading(true);
-    Promise.allSettled(tracksPromises)
-      .then((randomTracksResults) => {
-        const retrievedTracks = randomTracksResults.filter((result) => result.status === 'fulfilled') as PromiseFulfilledResult<Track>[];
 
-        setTracks([ ...tracks, ...retrievedTracks.map((result) => result.value) ]);
-      })
-      .catch((error) => {
-        console.error(error);
-      })
-      .finally(() => {
+    (async function getTracks() {
+      const { getTracksFromChart } = TrackApiFetcher();
+
+      try {
+        const response = await getTracksFromChart(300);
+        const data = await response.json() as Track[];
+
+        setTracks(data);
+      } catch (err) {
+        console.error(err);
+      } finally {
         setLoading(false);
-      });
-  }, [trackFlag]);
+      }
+    })();
+  }, []);
 
-  useEffect(() => {
+  useEffect(function choosingRandomTrack() {
     if (tracks.length > 0) {
-      const chosenTrackId = Math.floor(Math.random() * tracks.length);
-      const randomAudioPreview = new Audio(tracks[chosenTrackId].preview);
+      const randomIndexes = Randomizer.generateNbs(GAME_CONFIG.nbTracksToGuess, tracks.length);
+      const randomTracks = randomIndexes.map((index) => tracks[index]);
+
+      setRoundTracks(randomTracks);
+
+      const chosenTrackId = Math.floor(Math.random() * randomTracks.length);
+      const randomAudioPreview = new Audio(randomTracks[chosenTrackId].preview);
 
       randomAudioPreview.volume = soundOptions.volume;
       randomAudioPreview.muted = soundOptions.muted;
-      setChosenTrack(tracks[chosenTrackId]);
+      setChosenTrack(randomTracks[chosenTrackId]);
       setAudioPreview(randomAudioPreview);
     }
-  }, [tracks]);
+  }, [tracks, nextRoundFlag]);
 
-  useEffect(() => {
+  useEffect(function playPreview() {
     if (audioPreview) {
       audioPreview.play();
   
@@ -56,9 +62,9 @@ function useTrackDisplay({ soundOptions, setSoundOptions }: UseTrackDisplayParam
   }, [audioPreview]);
 
   function regenerateTracks() {
-    setTracks([]);
+    setRoundTracks([]);
+    setNextRoundFlag((prev) => !prev);
     audioPreview?.pause();
-    setTrackFlag((prev) => !prev);
   }
 
   function mute() {
@@ -91,7 +97,7 @@ function useTrackDisplay({ soundOptions, setSoundOptions }: UseTrackDisplayParam
   }
 
   return {
-    tracks,
+    roundTracks,
     chosenTrack,
     loading,
     audioPreview,

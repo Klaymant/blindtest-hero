@@ -11,10 +11,15 @@ const env = ENV_VARIABLES.env as Env;
 function TrackApiFetcher() {
   const publicApi = {
     getTrackFromChart,
+    getTracksFromChart,
   };
 
   function getTrackFromChart(index: number): Promise<Response> {
     return fetch(BACKEND_APIS[env] + '/chart/track/' + index.toString());
+  }
+
+  function getTracksFromChart(limit: number): Promise<Response> {
+    return fetch(BACKEND_APIS[env] + '/chart/tracks/' + limit.toString());
   }
 
   return publicApi;

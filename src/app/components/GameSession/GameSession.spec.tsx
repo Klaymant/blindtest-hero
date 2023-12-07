@@ -32,6 +32,68 @@ jest.mock('../../services/TrackApiFetcher.ts', () => ({
         resolve(response);
       });
     },
+    getTracksFromChart: function(): Promise<Response> {
+      const tracks: Track[] = [
+        {
+          id: 1,
+          title: 'title 1',
+          artist: {
+            name: 'artist',
+          },
+          album: {
+            cover_medium: 'cover',
+          },
+          preview: 'preview',
+        },
+        {
+          id: 2,
+          title: 'title 2',
+          artist: {
+            name: 'artist',
+          },
+          album: {
+            cover_medium: 'cover',
+          },
+          preview: 'preview',
+        },
+        {
+          id: 3,
+          title: 'title 3',
+          artist: {
+            name: 'artist',
+          },
+          album: {
+            cover_medium: 'cover',
+          },
+          preview: 'preview',
+        },
+        {
+          id: 4,
+          title: 'title 4',
+          artist: {
+            name: 'artist',
+          },
+          album: {
+            cover_medium: 'cover',
+          },
+          preview: 'preview',
+        },
+      ];
+  
+      return new Promise((resolve) => {
+        const responseBody = JSON.stringify(tracks);
+  
+        const response = new Response(responseBody, {
+          status: 200,
+          statusText: 'OK',
+          headers: {
+            'Content-type': 'application/json'
+          },
+        });
+  
+        resolve(response);
+      });
+    },
   }),
 }));
 
