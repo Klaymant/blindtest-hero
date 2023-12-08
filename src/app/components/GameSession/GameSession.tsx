@@ -1,10 +1,10 @@
 import { useBlindtestContext } from "@/app/contexts/BlindtestProvider";
-import { TrackDisplay } from "../TrackDisplay/TrackDisplay";
-import { useTrackDisplay } from "../TrackDisplay/useTrackDisplay";
+import { TrackSelection } from "../TrackSelection/TrackSelection";
+import { useTrackDisplay } from "../TrackSelection/useTrackDisplay";
 import { TracksProvider } from "@/app/contexts/TracksProvider";
-import Image, { StaticImageData } from "next/image";
 import volumeIcon from '../../../../public/volume.png';
 import muteIcon from '../../../../public/mute.png';
+import { VolumeIcon } from "./VolumeIcon";
 
 function GameSession() {
   const { score, lives, soundOptions, setSoundOptions } = useBlindtestContext();
@@ -37,21 +37,24 @@ function GameSession() {
               onClick={mute}
             >
               {audioPreview?.muted ?
-                VolumeIcon(muteIcon, 'mute icon') :
-                VolumeIcon(volumeIcon, 'volume icon')
+                <VolumeIcon src={muteIcon} alt="mute icon" /> :
+                <VolumeIcon src={volumeIcon} alt="volume icon" />
               }
             </button>
-            <input type="range" min="0" max="100" step="1" value={(audioPreview?.volume || 0) * 100} onChange={changeVolume} />
+            <input
+              type="range"
+              min="0"
+              max="100"
+              step="1"
+              value={(audioPreview?.volume || 0) * 100}
+              onChange={changeVolume}
+            />
           </section>
         </section>
-        <TrackDisplay />
+        <TrackSelection />
       </TracksProvider>
     </>
   )
-}
-
-function VolumeIcon(src: StaticImageData, alt: string) {
-  return <Image src={src} width={12} height={12} alt={alt} />;
 }
 
 export { GameSession };

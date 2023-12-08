@@ -3,8 +3,9 @@ import { Track } from "@/app/types/Track";
 import { useBlindtestContext } from "@/app/contexts/BlindtestProvider";
 import { SyntheticEvent } from "react";
 import { useTracksContext } from "@/app/contexts/TracksProvider";
+import { TrackCard } from "./Track";
 
-export function TrackDisplay() {
+export function TrackSelection() {
   const { tracks, chosenTrack, loading, regenerateTracks } = useTracksContext();
   const { increaseScore, loseLife, setScreenSelection, lives } = useBlindtestContext();
 
@@ -28,32 +29,24 @@ export function TrackDisplay() {
   return (
     <>
       {loading && <p>Loading...</p>}
-      {!loading && hasEmptyTracks(tracks) && NoMoreTrackElement()}
-      {!loading && !hasEmptyTracks(tracks) && TracksElement(tracks, guessTrack)}
+      {!loading && hasEmptyTracks(tracks) && <NoMoreTrack />}
+      {!loading && !hasEmptyTracks(tracks) && <Tracks tracks={tracks} guessTrack={guessTrack} />}
     </>
   );
 }
 
-function TracksElement(tracks: Track[], guessTrack: (e: SyntheticEvent, trackId: number) => void) {
+function Tracks({ tracks, guessTrack }: TracksProps) {
   return (
     <section className="track-display">
-      {tracks.map((track) => (
-        <button key={track.id} onClick={(e) => guessTrack(e, track.id)}>
-          <img src={track.album.cover_medium} alt={getCoverAltText(track)} />
-          <p>
-            {shortenTrackTitle(track.title)}<br/>
-            {track.artist.name}
-          </p>
-        </button>
-      ))}
+      {tracks.map((track) => <TrackCard key={track.id} track={track} guessTrack={guessTrack} />)}
     </section>
   );
 }
 
-function NoMoreTrackElement() {
+function NoMoreTrack() {
   return (
     <>
-      <h2>End game</h2>
+      <h2>Music is over</h2>
       <p>
         Oops! It seems no more song is available.
       </p>
@@ -65,10 +58,7 @@ function hasEmptyTracks(tracks: Track[]): boolean {
   return !tracks.every(Boolean);
 }
 
-function getCoverAltText(track: Track): string {
-  return `Cover of ${track.title} by ${track.artist.name}`;
-}
-
-function shortenTrackTitle(title: string): string {
-  return title.length > 20 ? title.substring(0, 20) + '...' : title;
-}
+type TracksProps = {
+  tracks: Track[];
+  guessTrack: (e: SyntheticEvent, trackId: number) => void;
+};
