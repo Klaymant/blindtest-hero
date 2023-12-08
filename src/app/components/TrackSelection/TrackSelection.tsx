@@ -4,6 +4,7 @@ import { useBlindtestContext } from "@/app/contexts/BlindtestProvider";
 import { SyntheticEvent } from "react";
 import { useTracksContext } from "@/app/contexts/TracksProvider";
 import { TrackCard } from "./Track";
+import { GAME_CONFIG } from "@/app/config";
 
 export function TrackSelection() {
   const { tracks, chosenTrack, loading, regenerateTracks } = useTracksContext();
@@ -23,7 +24,7 @@ export function TrackSelection() {
 
     setTimeout(() => {
       regenerateTracks();
-    }, 1000);
+    }, GAME_CONFIG.timeBeforeNextRoundInMs);
   }
 
   return (
