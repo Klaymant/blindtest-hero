@@ -4,7 +4,6 @@ import { SoundOptions } from "@/app/types/SoundOptions";
 import { Track } from "@/app/types/Track";
 import { Randomizer } from "@/app/utils/Randomizer";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { RandomTrackGenerator } from "./RandomTrackGenerator";
 import { TrackApiFetcher } from "@/app/services/TrackApiFetcher";
 
 function useTrackDisplay({ soundOptions, setSoundOptions }: UseTrackDisplayParams) {
@@ -14,6 +13,7 @@ function useTrackDisplay({ soundOptions, setSoundOptions }: UseTrackDisplayParam
   const [chosenTrack, setChosenTrack] = useState<Track>();
   const [audioPreview, setAudioPreview] = useState<HTMLAudioElement>();
   const [nextRoundFlag, setNextRoundFlag] = useState(false);
+  const [generatedIds, setGeneratedIds] = useState<number[]>([]);
 
   useEffect(function fetchChartTracks() {
     setLoading(true);
@@ -22,7 +22,7 @@ function useTrackDisplay({ soundOptions, setSoundOptions }: UseTrackDisplayParam
       const { getTracksFromChart } = TrackApiFetcher();
 
       try {
-        const response = await getTracksFromChart(300);
+        const response = await getTracksFromChart(GAME_CONFIG.chartLimit);
         const data = await response.json() as Track[];
 
         setTracks(data);
@@ -36,14 +36,15 @@ function useTrackDisplay({ soundOptions, setSoundOptions }: UseTrackDisplayParam
 
   useEffect(function choosingRandomTrack() {
     if (tracks.length > 0) {
-      const randomIndexes = Randomizer.generateNbs(GAME_CONFIG.nbTracksToGuess, tracks.length);
+      const randomIndexes = Randomizer.generateNbs(GAME_CONFIG.nbTracksToGuess, tracks.length, generatedIds);
       const randomTracks = randomIndexes.map((index) => tracks[index]);
 
       setRoundTracks(randomTracks);
 
       const chosenTrackId = Math.floor(Math.random() * randomTracks.length);
-      const randomAudioPreview = new Audio(randomTracks[chosenTrackId].preview);
+      const randomAudioPreview = new Audio(randomTracks[chosenTrackId]?.preview);
 
+      setGeneratedIds((prev) => [...prev, randomIndexes[chosenTrackId]]);
       randomAudioPreview.volume = soundOptions.volume;
       randomAudioPreview.muted = soundOptions.muted;
       setChosenTrack(randomTracks[chosenTrackId]);
@@ -52,7 +53,7 @@ function useTrackDisplay({ soundOptions, setSoundOptions }: UseTrackDisplayParam
   }, [tracks, nextRoundFlag]);
 
   useEffect(function playPreview() {
-    if (audioPreview) {
+    if (audioPreview && roundTracks.every(Boolean)) {
       audioPreview.play();
   
       return function pauseAudioPreview() {

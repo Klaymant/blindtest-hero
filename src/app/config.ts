@@ -1,7 +1,7 @@
 const GAME_CONFIG = {
   nbTracksToGuess: 4,
   nbLives: 5,
-  maxTrackIndex: 170,
+  chartLimit: 300,
 };
 
 const ENV_VARIABLES = {

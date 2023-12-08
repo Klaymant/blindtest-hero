@@ -1,5 +1,5 @@
 import { useBlindtestContext } from "@/app/contexts/BlindtestProvider";
-import TrackDisplay from "../TrackDisplay/TrackDisplay";
+import { TrackDisplay } from "../TrackDisplay/TrackDisplay";
 import { useTrackDisplay } from "../TrackDisplay/useTrackDisplay";
 import { TracksProvider } from "@/app/contexts/TracksProvider";
 import Image, { StaticImageData } from "next/image";

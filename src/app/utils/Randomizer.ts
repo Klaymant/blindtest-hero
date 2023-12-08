@@ -1,17 +1,20 @@
 
 const Randomizer = {
-  generateNbs(amount: number, maxValue: number): number[] {
+  generateNbs(amount: number, maxValue: number, valuesToExclude: number[]): number[] {
     const randomNbs: number[] = [];
+    const values: number[] = Array
+      .from({ length: maxValue }, (_, i) => i)
+      .filter(nb => !valuesToExclude.includes(nb));
 
     while (randomNbs.length < amount) {
-      const randomNb = Math.floor(Math.random() * maxValue);
+      const randomIndex = Math.floor(Math.random() * values.length);
+      const randomNb = values.splice(randomIndex, 1)[0];
 
-      if (!randomNbs.includes(randomNb))
-        randomNbs.push(randomNb);
+      randomNbs.push(randomNb);
     }
 
     return randomNbs;
-  }
+  },
 };
 
 export { Randomizer };

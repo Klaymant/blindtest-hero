@@ -4,7 +4,7 @@ import { useBlindtestContext } from "@/app/contexts/BlindtestProvider";
 import { SyntheticEvent } from "react";
 import { useTracksContext } from "@/app/contexts/TracksProvider";
 
-export default function TrackDisplay() {
+export function TrackDisplay() {
   const { tracks, chosenTrack, loading, regenerateTracks } = useTracksContext();
   const { increaseScore, loseLife, setScreenSelection, lives } = useBlindtestContext();
 
@@ -25,30 +25,50 @@ export default function TrackDisplay() {
     }, 1000);
   }
 
-  function getCoverAltText(track: Track): string {
-    return `Cover of ${track.title} by ${track.artist.name}`;
-  }
+  return (
+    <>
+      {loading && <p>Loading...</p>}
+      {!loading && hasEmptyTracks(tracks) && NoMoreTrackElement()}
+      {!loading && !hasEmptyTracks(tracks) && TracksElement(tracks, guessTrack)}
+    </>
+  );
+}
 
-  function shortenTrackTitle(title: string): string {
-    return title.length > 20 ? title.substring(0, 20) + '...' : title;
-  }
-
+function TracksElement(tracks: Track[], guessTrack: (e: SyntheticEvent, trackId: number) => void) {
   return (
     <section className="track-display">
-      {loading && <p>Loading...</p>}
-      {!loading && (
-        <>
-          {tracks.map((track) => (
-          <button key={track.id} onClick={(e) => guessTrack(e, track.id)}>
-            <img src={track.album.cover_medium} alt={getCoverAltText(track)} />
-            <p>
-              {shortenTrackTitle(track.title)}<br/>
-              {track.artist.name}
-            </p>
-          </button>
-          ))}
-        </>
-      )}
+      {tracks.map((track) => (
+        <button key={track.id} onClick={(e) => guessTrack(e, track.id)}>
+          <img src={track.album.cover_medium} alt={getCoverAltText(track)} />
+          <p>
+            {shortenTrackTitle(track.title)}<br/>
+            {track.artist.name}
+          </p>
+        </button>
+      ))}
     </section>
   );
+}
+
+function NoMoreTrackElement() {
+  return (
+    <>
+      <h2>End game</h2>
+      <p>
+        Oops! It seems no more song is available.
+      </p>
+    </>
+  );
+}
+
+function hasEmptyTracks(tracks: Track[]): boolean {
+  return !tracks.every(Boolean);
+}
+
+function getCoverAltText(track: Track): string {
+  return `Cover of ${track.title} by ${track.artist.name}`;
+}
+
+function shortenTrackTitle(title: string): string {
+  return title.length > 20 ? title.substring(0, 20) + '...' : title;
 }
