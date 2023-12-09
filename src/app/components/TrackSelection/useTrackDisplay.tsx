@@ -39,17 +39,15 @@ function useTrackDisplay({ soundOptions, setSoundOptions }: UseTrackDisplayParam
     if (tracks.length > 0) {
       const randomIndexes = Randomizer.generateNbs(GAME_CONFIG.nbTracksToGuess, tracks.length, generatedIds);
       const randomTracks = randomIndexes.map((index) => tracks[index]);
-
-      setRoundTracks(randomTracks);
-
       const chosenTrackId = Math.floor(Math.random() * randomTracks.length);
-      const randomAudioPreview = new Audio(randomTracks[chosenTrackId]?.preview);
-
+      const chosenTrackAudioPreview = new Audio(randomTracks[chosenTrackId]?.preview);
+      
+      chosenTrackAudioPreview.volume = soundOptions.volume;
+      chosenTrackAudioPreview.muted = soundOptions.muted;
+      setRoundTracks(randomTracks);
       setGeneratedIds((prev) => [...prev, randomIndexes[chosenTrackId]]);
-      randomAudioPreview.volume = soundOptions.volume;
-      randomAudioPreview.muted = soundOptions.muted;
       setChosenTrack(randomTracks[chosenTrackId]);
-      setAudioPreview(randomAudioPreview);
+      setAudioPreview(chosenTrackAudioPreview);
     }
   }, [tracks, nextRoundFlag]);
 
@@ -81,12 +79,35 @@ function useTrackDisplay({ soundOptions, setSoundOptions }: UseTrackDisplayParam
   }
 
   function changeVolume(e: React.ChangeEvent<HTMLInputElement>) {
+    const newVolume = Number(e.target.value) / 100;
+
+    handleVolume(newVolume);
+  }
+
+  function increaseVolume() {
+    const newVolume =
+      audioPreview && audioPreview.volume < 0.9
+        ? audioPreview.volume + 0.1
+        : 1;
+
+    handleVolume(newVolume);
+  }
+
+  function decreaseVolume() {
+    const newVolume = audioPreview && audioPreview.volume > 0.1
+      ? audioPreview.volume - 0.1
+      : 0;
+
+    handleVolume(newVolume);
+  }
+
+  function handleVolume(newVolume: number) {
     if (audioPreview) {
       const { copyAudioElement } = AudioHandler();
       const audioCopy = copyAudioElement(audioPreview);
 
-      audioCopy.volume = e.target.valueAsNumber / 100;
-      setSoundOptions((prev) => ({ ...prev, volume: e.target.valueAsNumber / 100 }));
+      audioCopy.volume = newVolume;
+      setSoundOptions((prev) => ({ ...prev, volume: newVolume }));
       setAudioPreview(audioCopy);
     }
   }
@@ -97,6 +118,8 @@ function useTrackDisplay({ soundOptions, setSoundOptions }: UseTrackDisplayParam
     loading,
     audioPreview,
     changeVolume,
+    increaseVolume,
+    decreaseVolume,
     setAudioPreview,
     regenerateTracks,
     mute,
