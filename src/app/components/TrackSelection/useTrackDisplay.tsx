@@ -5,6 +5,7 @@ import { Track } from "@/app/types/Track";
 import { Randomizer } from "@/app/utils/Randomizer";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { TrackApiFetcher } from "@/app/services/TrackApiFetcher";
+import { AudioHandler } from "@/app/services/AudioHandler";
 
 function useTrackDisplay({ soundOptions, setSoundOptions }: UseTrackDisplayParams) {
   const [loading, setLoading] = useState(false);
@@ -70,6 +71,7 @@ function useTrackDisplay({ soundOptions, setSoundOptions }: UseTrackDisplayParam
 
   function mute() {
     if (audioPreview) {
+      const { copyAudioElement } = AudioHandler();
       const audioCopy = copyAudioElement(audioPreview);
 
       audioCopy.muted = !audioPreview.muted;
@@ -80,21 +82,13 @@ function useTrackDisplay({ soundOptions, setSoundOptions }: UseTrackDisplayParam
 
   function changeVolume(e: React.ChangeEvent<HTMLInputElement>) {
     if (audioPreview) {
+      const { copyAudioElement } = AudioHandler();
       const audioCopy = copyAudioElement(audioPreview);
 
       audioCopy.volume = e.target.valueAsNumber / 100;
       setSoundOptions((prev) => ({ ...prev, volume: e.target.valueAsNumber / 100 }));
       setAudioPreview(audioCopy);
     }
-  }
-
-  function copyAudioElement(audio: HTMLAudioElement): HTMLAudioElement {
-    const audioCopy = new Audio(audio.src);
-
-    audioCopy.muted = audio.muted;
-    audioCopy.currentTime = audio.currentTime;
-    audioCopy.volume = audio.volume;
-    return audioCopy;
   }
 
   return {
