@@ -92,6 +92,7 @@
     text-align: left;
     color: var(--primary);
     margin-bottom: 1rem;
+    font-family: 'Engcomica';
   }
 
   #screen-title p {
