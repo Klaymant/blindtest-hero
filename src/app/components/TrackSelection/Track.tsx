@@ -10,7 +10,7 @@ export function TrackCard({ track, guessTrack }: Props) {
       <img src={track.album.cover_medium} alt={coverAltText} />
       <p>
         {StringModifier.shorten(track.title, 20)}<br/>
-        {track.artist.name}
+        {StringModifier.shorten(track.artist.name, 20)}
       </p>
     </button>
   );
