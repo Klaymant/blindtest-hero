@@ -16,6 +16,8 @@
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 20, 0, 20;
+    --title-font: 'Engcomica';
+    --text-font: 'Walkway';
   }
 
   * {
@@ -73,21 +75,33 @@
 
   #screen-title {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    min-height: 90vh;
+    font-family: var(--text-font);
+    text-align: left;
+  }
+
+  #screen-title h2 {
+    text-align: left;
+    color: var(--primary);
+  }
+
+  #screen-title p {
+    font-size: 1.25rem;
   }
 
   #screen-title button {
     border: 0;
     border-radius: 5px;
-    font-size: 2.5rem;
-    padding: 1.5rem;
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
     cursor: pointer;
     background: transparent;
     border: solid 3px var(--primary);
     color: var(--primary);
-    font-family: 'Engcomica';
     transition: 0.2s;
   }
 
@@ -225,6 +239,14 @@
 
     #audio-controls {
       justify-content: center;
+    }
+
+    #screen-title, #screen-title h2 {
+      text-align: center;
+    }
+
+    #screen-title div {
+      margin: 0 0.5rem;
     }
   }
 
