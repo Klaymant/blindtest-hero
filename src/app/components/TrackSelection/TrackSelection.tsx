@@ -15,7 +15,10 @@ export function TrackSelection() {
       e.currentTarget.classList.add('success');
       increaseScore(100);
     } else if (lives > 1) {
+      const chosenTrackElement = document.getElementById(String(chosenTrack?.id));
+
       e.currentTarget.classList.add('fail');
+      chosenTrackElement?.classList.add('real-track');
       loseLife();
     } else {
       e.currentTarget.classList.add('fail');

@@ -177,11 +177,15 @@
   }
 
   .fail {
-    animation: fail 1s ease-in-out 1;
+    animation: fail 1.5s ease-in-out 1;
   }
 
   .success {
-    animation: switchToGreen 1s ease-in-out 1;
+    animation: switchToGreen 1.5s ease-in-out 1;
+  }
+
+  .real-track {
+    animation: realTrack 1.5s ease-in-out 1;
   }
 
   #audio-controls {
@@ -252,6 +256,21 @@
     0% { border-color: green }
   }
 
+  @keyframes realTrack {
+    0% {
+      opacity: 0;
+    }
+    25% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    75% {
+      opacity: 1;
+    }
+  }
+
   @keyframes fail {
     0% {
       transform: translateX(0px);
@@ -273,12 +292,6 @@
       transform: translateX(0px);
       filter: brightness(0) invert(17%) sepia(91%) saturate(2957%) hue-rotate(343deg) brightness(98%) contrast(97%);
     }
-  }
-
-  @keyframes win {
-    0% { border: 0 }
-    50% { border: solid 2px green }
-    100% { border: 0 }
   }
 
   @keyframes switchToGreen {
