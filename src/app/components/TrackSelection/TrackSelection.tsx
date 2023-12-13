@@ -11,22 +11,25 @@ export function TrackSelection() {
   const { increaseScore, loseLife, setScreenSelection, lives } = useBlindtestContext();
 
   function guessTrack(e: SyntheticEvent, trackId: number) {
+    let currentLives = lives;
+
     if (trackId === chosenTrack?.id) {
       e.currentTarget.classList.add('success');
       increaseScore(100);
-    } else if (lives > 1) {
+    } else {
       const chosenTrackElement = document.getElementById(String(chosenTrack?.id));
 
       e.currentTarget.classList.add('fail');
       chosenTrackElement?.classList.add('real-track');
       loseLife();
-    } else {
-      e.currentTarget.classList.add('fail');
-      setScreenSelection('game-over');
+      currentLives--;
     }
 
     setTimeout(() => {
-      regenerateTracks();
+      if (currentLives > 0) {
+        regenerateTracks();
+      } else
+        setScreenSelection('game-over');
     }, GAME_CONFIG.timeBeforeNextRoundInMs);
   }
 
