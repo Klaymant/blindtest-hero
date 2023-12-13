@@ -2,7 +2,7 @@ const GAME_CONFIG = {
   nbTracksToGuess: 4,
   nbLives: 5,
   chartLimit: 300,
-  timeBeforeNextRoundInMs: 1000,
+  timeBeforeNextRoundInMs: 1500,
 };
 
 const ENV_VARIABLES = {
