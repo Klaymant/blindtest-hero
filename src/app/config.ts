@@ -3,6 +3,7 @@ const GAME_CONFIG = {
   nbLives: 5,
   chartLimit: 300,
   timeBeforeNextRoundInMs: 1500,
+  defaultAudioPreviewVolume: 0.3,
 };
 
 const ENV_VARIABLES = {

@@ -1,6 +1,6 @@
 import { VolumeIcon } from "./VolumeIcon";
-import volumeIcon from '../../../../public/volume.png';
-import muteIcon from '../../../../public/mute.png';
+import volumeIcon from '../../../public/volume.png';
+import muteIcon from '../../../public/mute.png';
 
 export function AudioControls({ audioPreview, mute, changeVolume }: Props) {
   return (
