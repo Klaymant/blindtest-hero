@@ -73,6 +73,10 @@
     letter-spacing: 0.8px;
   }
 
+  main p {
+    text-align: center;
+  }
+
   #title-container {
     display: flex;
     justify-content: center;
@@ -115,6 +119,25 @@
   #screen-title button:hover {
     background-color: var(--primary);
     color: white;
+  }
+
+  .counter {
+    margin-bottom: 2rem;
+  }
+
+  .counter span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 50px;
+    background: var(--primary);
+    border-radius: 9999px;
+    margin: auto;
+  }
+
+  .glow-up {
+    animation: glowUp 2s ease-in-out infinite;
   }
 
   #game-over {
@@ -297,6 +320,18 @@
   @keyframes switchToGreen {
     0% {
       filter: brightness(0) invert(69%) sepia(90%) saturate(1484%) hue-rotate(84deg) brightness(101%) contrast(105%);
+    }
+  }
+
+  @keyframes glowUp {
+    0% {
+      box-shadow: 0 0 8px -3px var(--primary);
+    }
+    50% {
+      box-shadow: 0 0 8px 5px white;
+    }
+    100% {
+      box-shadow: 0 0 8px -3px var(--primary);
     }
   }
 }

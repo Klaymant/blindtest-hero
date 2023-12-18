@@ -12,7 +12,9 @@ function GameSession() {
     chosenTrack,
     loading,
     audioPreview,
+    currentAudioPreviewTime,
     regenerateTracks,
+    resetCurrentAudioPreviewTime,
     mute,
     changeVolume,
     increaseVolume,
@@ -27,7 +29,9 @@ function GameSession() {
         chosenTrack={chosenTrack}
         loading={loading}
         audioPreview={audioPreview}
+        currentAudioPreviewTime={currentAudioPreviewTime}
         regenerateTracks={regenerateTracks}
+        resetCurrentAudioPreviewTime={resetCurrentAudioPreviewTime}
       >
         <section id="play-data">
           <p id="score">Score: <span>{score}</span></p>

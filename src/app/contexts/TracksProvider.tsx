@@ -27,11 +27,13 @@ type TracksContextType = {
   tracks: Track[];
   chosenTrack: Track | undefined;
   audioPreview: HTMLAudioElement | undefined;
+  currentAudioPreviewTime: number;
   regenerateTracks: () => void;
+  resetCurrentAudioPreviewTime: () => void;
 };
 
 type TracksProviderProps = {
   children: ReactNode;
 } & TracksContextType;
 
-export { TracksProvider, useTracksContext }
+export { TracksProvider, useTracksContext };

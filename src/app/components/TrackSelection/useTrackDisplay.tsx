@@ -15,6 +15,7 @@ function useTrackDisplay({ soundOptions, setSoundOptions }: UseTrackDisplayParam
   const [audioPreview, setAudioPreview] = useState<HTMLAudioElement>();
   const [nextRoundFlag, setNextRoundFlag] = useState(false);
   const [generatedIds, setGeneratedIds] = useState<number[]>([]);
+  const [currentAudioPreviewTime, setCurrentAudioPreviewTime] = useState(0);
 
   useEffect(function fetchChartTracks() {
     setLoading(true);
@@ -60,6 +61,16 @@ function useTrackDisplay({ soundOptions, setSoundOptions }: UseTrackDisplayParam
       };
     }
   }, [audioPreview]);
+
+  useEffect(function delayAudioTimer() {
+    if (audioPreview && currentAudioPreviewTime <= 30) {
+      const timer = setInterval(() => {
+        setCurrentAudioPreviewTime(audioPreview.currentTime);
+      }, 1000);
+
+      return () => clearInterval(timer);
+    }
+  }, [audioPreview, currentAudioPreviewTime]);
 
   function regenerateTracks() {
     setRoundTracks([]);
@@ -112,15 +123,21 @@ function useTrackDisplay({ soundOptions, setSoundOptions }: UseTrackDisplayParam
     }
   }
 
+  function resetCurrentAudioPreviewTime() {
+    setCurrentAudioPreviewTime(0);
+  }
+
   return {
     roundTracks,
     chosenTrack,
     loading,
     audioPreview,
+    currentAudioPreviewTime,
     changeVolume,
     increaseVolume,
     decreaseVolume,
     setAudioPreview,
+    resetCurrentAudioPreviewTime,
     regenerateTracks,
     mute,
   };

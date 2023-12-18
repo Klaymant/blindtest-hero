@@ -7,8 +7,15 @@ import { TrackCard } from "./Track";
 import { GAME_CONFIG } from "@/app/config";
 
 export function TrackSelection() {
-  const { tracks, chosenTrack, loading, regenerateTracks } = useTracksContext();
-  const { increaseScore, loseLife, setScreenSelection, lives } = useBlindtestContext();
+  const {
+    tracks,
+    chosenTrack,
+    audioPreview,
+    loading,
+    regenerateTracks,
+    resetCurrentAudioPreviewTime,
+  } = useTracksContext();
+  const { lives, increaseScore, loseLife, setScreenSelection } = useBlindtestContext();
 
   function guessTrack(e: SyntheticEvent, trackId: number) {
     let currentLives = lives;
@@ -27,6 +34,7 @@ export function TrackSelection() {
 
     setTimeout(() => {
       if (currentLives > 0) {
+        resetCurrentAudioPreviewTime();
         regenerateTracks();
       } else
         setScreenSelection('game-over');
@@ -37,16 +45,33 @@ export function TrackSelection() {
     <>
       {loading && <p>Loading...</p>}
       {!loading && hasEmptyTracks(tracks) && <NoMoreTrack />}
-      {!loading && !hasEmptyTracks(tracks) && <Tracks tracks={tracks} guessTrack={guessTrack} />}
+      {!loading && !hasEmptyTracks(tracks) && (
+        <>
+          <AudioPreviewCounter currentTime={audioPreview?.currentTime || 0} />
+          <Tracks tracks={tracks} guessTrack={guessTrack} />
+        </>
+      )}
     </>
   );
 }
 
 function Tracks({ tracks, guessTrack }: TracksProps) {
   return (
-    <section className="track-display">
-      {tracks.map((track) => <TrackCard key={track.id} track={track} guessTrack={guessTrack} />)}
-    </section>
+    <>
+      <section className="track-display">
+        {tracks.map((track) => <TrackCard key={track.id} track={track} guessTrack={guessTrack} />)}
+      </section>
+    </>
+  );
+}
+
+function AudioPreviewCounter({ currentTime }: { currentTime: number }) {
+  const counter = currentTime > 30 ? 0 : Math.floor(30 - currentTime);
+
+  return (
+    <p className="counter">
+      <span className={`${counter > 0 && 'glow-up'}`}>{counter}</span>
+    </p>
   );
 }
 
