@@ -11,7 +11,6 @@ export function TrackSelection() {
     tracks,
     chosenTrack,
     loading,
-    roundCounter,
     regenerateTracks,
     resetRoundCounter,
   } = useTracksContext();
@@ -49,7 +48,6 @@ export function TrackSelection() {
       {!loading && hasEmptyTracks(tracks) && <NoMoreTrack />}
       {!loading && !hasEmptyTracks(tracks) && (
         <>
-          <AudioPreviewCounter counter={roundCounter} />
           <Tracks tracks={tracks} isTrackChosen={isTrackChosen} guessTrack={guessTrack} setIsTrackChosen={setIsTrackChosen} />
         </>
       )}
@@ -72,14 +70,6 @@ function Tracks({ tracks, isTrackChosen, guessTrack, setIsTrackChosen }: TracksP
         ))}
       </section>
     </>
-  );
-}
-
-function AudioPreviewCounter({ counter }: { counter: number }) {
-  return (
-    <p className="counter">
-      <span className={`${counter > 0 && 'glow-up'}`}>{counter}</span>
-    </p>
   );
 }
 

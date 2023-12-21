@@ -37,11 +37,20 @@ function GameSession() {
           <p id="score">Score: <span>{score}</span></p>
           <p id="lives">Lives: <span>{lives}</span></p>
           <AudioControls audioPreview={audioPreview} mute={mute} changeVolume={changeVolume} />
+          <AudioPreviewCounter counter={roundCounter} />
         </section>
         <TrackSelection />
       </TracksProvider>
     </>
   )
+}
+
+function AudioPreviewCounter({ counter }: { counter: number }) {
+  return (
+    <p className="counter">
+      <span className={`${counter > 0 && 'glow-up'}`}>{counter}</span>
+    </p>
+  );
 }
 
 export { GameSession };
