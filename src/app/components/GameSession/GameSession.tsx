@@ -6,7 +6,7 @@ import { AudioControls } from "../AudioControls";
 import { useGameSession } from "./GameSession.hooks";
 
 function GameSession() {
-  const { score, lives, soundOptions, setSoundOptions, setScreenSelection, loseLife } = useBlindtestContext();
+  const { round, lives, soundOptions, setSoundOptions, setScreenSelection, loseLife } = useBlindtestContext();
   const {
     roundTracks,
     chosenTrack,
@@ -34,10 +34,10 @@ function GameSession() {
         resetRoundCounter={resetRoundCounter}
       >
         <section id="play-data">
-          <p id="score">Score: <span>{score}</span></p>
-          <p id="lives">Lives: <span>{lives}</span></p>
           <AudioControls audioPreview={audioPreview} mute={mute} changeVolume={changeVolume} />
           <AudioPreviewCounter counter={roundCounter} />
+          <p id="round">Round <span className="appear">{round}</span></p>
+          <p id="lives">Lives: <span>{lives}</span></p>
         </section>
         <TrackSelection />
       </TracksProvider>

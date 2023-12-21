@@ -103,10 +103,10 @@ describe('Tests for initial game session screen', () => {
 
     await playGame();
 
-    const score = getSelectorContent(container, '#score span');
+    const round = getSelectorContent(container, '#round span');
     const nbLives = getSelectorContent(container, '#lives span');
 
-    expect(score).toBe('0');
+    expect(round).toBe('1');
     expect(nbLives).toBe('5');
   });
 

@@ -1,7 +1,7 @@
 import { useBlindtestContext } from "@/app/contexts/BlindtestProvider";
 
 function GameOver() {
-  const { score, setScreenSelection, resetGame } = useBlindtestContext();
+  const { round, setScreenSelection, resetGame } = useBlindtestContext();
 
   function replay() {
     resetGame();
@@ -12,7 +12,7 @@ function GameOver() {
     <section id="game-over">
       <div>
         <h2>Game over</h2>
-        <p>You reached {score} points! Well done!</p>
+        <p>You reached round {round}! Well done!</p>
         <button type="button" className="game-navigation" onClick={replay}>Play again</button>
       </div>
     </section>

@@ -24,11 +24,11 @@ function BlindtestProvider(props: BlindtestProviderProps) {
 }
 
 type BlindtestContextType = {
-  score: number;
+  round: number;
   lives: number;
   screenSelection: ScreenSelection;
   soundOptions: SoundOptions;
-  increaseScore: (increase: number) => void;
+  increaseRound: (increase: number) => void;
   loseLife: () => void;
   setScreenSelection: Dispatch<SetStateAction<ScreenSelection>>;
   setSoundOptions: Dispatch<SetStateAction<SoundOptions>>;

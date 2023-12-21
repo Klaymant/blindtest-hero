@@ -4,12 +4,12 @@ import { useBlindtest } from "./Blindtest.hooks";
 
 function Blindtest() {
   const {
-    score,
+    round,
     lives,
     screenSelection,
     screenSelectionMap,
     soundOptions,
-    increaseScore,
+    increaseRound,
     loseLife,
     setScreenSelection,
     setSoundOptions,
@@ -18,11 +18,11 @@ function Blindtest() {
 
   return (
     <BlindtestProvider
-      score={score}
+      round={round}
       lives={lives}
       screenSelection={screenSelection}
       soundOptions={soundOptions}
-      increaseScore={increaseScore}
+      increaseRound={increaseRound}
       loseLife={loseLife}
       setScreenSelection={setScreenSelection}
       setSoundOptions={setSoundOptions}

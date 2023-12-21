@@ -14,7 +14,7 @@ export function TrackSelection() {
     regenerateTracks,
     resetRoundCounter,
   } = useTracksContext();
-  const { lives, increaseScore, loseLife, setScreenSelection } = useBlindtestContext();
+  const { lives, increaseRound, loseLife, setScreenSelection } = useBlindtestContext();
   const [isTrackChosen, setIsTrackChosen] = useState(false);
 
   function guessTrack(e: SyntheticEvent, trackId: number) {
@@ -22,7 +22,7 @@ export function TrackSelection() {
 
     if (trackId === chosenTrack?.id) {
       e.currentTarget.classList.add('success');
-      increaseScore(100);
+      increaseRound(1);
     } else {
       const chosenTrackElement = document.getElementById(String(chosenTrack?.id));
 

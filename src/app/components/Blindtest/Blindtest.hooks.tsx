@@ -7,7 +7,7 @@ import { GameSession } from "../GameSession/GameSession";
 import { GameOver } from "../GameOver/GameOver";
 
 function useBlindtest() {
-  const [score, setScore] = useState(0);
+  const [round, setRound] = useState(1);
   const [lives, setLives] = useState(GAME_CONFIG.nbLives);
   const [screenSelection, setScreenSelection] = useState<ScreenSelection>('home');
   const [soundOptions, setSoundOptions] = useState<SoundOptions>({
@@ -20,8 +20,8 @@ function useBlindtest() {
     'game-over': <GameOver />,
   }
 
-  function increaseScore(increase: number) {
-    setScore((prev) => prev + increase);
+  function increaseRound(increase: number) {
+    setRound((prev) => prev + increase);
   }
 
   function loseLife() {
@@ -29,17 +29,17 @@ function useBlindtest() {
   }
 
   function resetGame() {
-    setScore(0);
+    setRound(1);
     setLives(GAME_CONFIG.nbLives);
   }
 
   return {
-    score,
+    round,
     lives,
     screenSelection,
     soundOptions,
     screenSelectionMap,
-    increaseScore,
+    increaseRound,
     loseLife,
     setScreenSelection,
     setSoundOptions,
