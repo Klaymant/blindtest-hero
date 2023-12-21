@@ -75,11 +75,17 @@ function useTrackDisplay({ soundOptions, lives, setSoundOptions, setScreenSelect
 
   useEffect(function checkRoundCounter() {
     if (audioPreview && roundCounter === 0) {
-      if (lives > 1) {
-        loseLife();
-        regenerateTracks();
-      } else
-        setScreenSelection('game-over');
+      const chosenTrackElement = document.getElementById(String(chosenTrack?.id));
+
+      chosenTrackElement?.classList.add('real-track');
+
+      setTimeout(() => {
+        if (lives > 1) {
+          loseLife();
+          regenerateTracks();
+        } else
+          setScreenSelection('game-over');
+      }, GAME_CONFIG.timeBeforeNextRoundInMs);
     }
   }, [audioPreview, roundCounter]);
 
