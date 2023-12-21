@@ -45,7 +45,7 @@ export function TrackSelection() {
 
   return (
     <>
-      {loading && <p>Loading...</p>}
+      {loading && <p className="text-center">Loading...</p>}
       {!loading && hasEmptyTracks(tracks) && <NoMoreTrack />}
       {!loading && !hasEmptyTracks(tracks) && (
         <>

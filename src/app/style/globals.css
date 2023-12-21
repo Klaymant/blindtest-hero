@@ -217,6 +217,10 @@
     cursor: pointer;
   }
 
+  .text-center {
+    text-align: center;
+  }
+
   @media screen and (min-width: 501px) {
     main p {
       text-align: center;
