@@ -1,7 +1,7 @@
 'use client';
 import { Track } from "@/app/types/Track";
 import { useBlindtestContext } from "@/app/contexts/BlindtestProvider";
-import { SyntheticEvent } from "react";
+import { Dispatch, SetStateAction, SyntheticEvent, useState } from "react";
 import { useTracksContext } from "@/app/contexts/TracksProvider";
 import { TrackCard } from "./Track";
 import { GAME_CONFIG } from "@/app/config";
@@ -10,13 +10,13 @@ export function TrackSelection() {
   const {
     tracks,
     chosenTrack,
-    audioPreview,
     loading,
     roundCounter,
     regenerateTracks,
     resetRoundCounter,
   } = useTracksContext();
   const { lives, increaseScore, loseLife, setScreenSelection } = useBlindtestContext();
+  const [isTrackChosen, setIsTrackChosen] = useState(false);
 
   function guessTrack(e: SyntheticEvent, trackId: number) {
     let currentLives = lives;
@@ -37,6 +37,7 @@ export function TrackSelection() {
       if (currentLives > 0) {
         resetRoundCounter();
         regenerateTracks();
+        setIsTrackChosen(false);
       } else
         setScreenSelection('game-over');
     }, GAME_CONFIG.timeBeforeNextRoundInMs);
@@ -49,18 +50,26 @@ export function TrackSelection() {
       {!loading && !hasEmptyTracks(tracks) && (
         <>
           <AudioPreviewCounter counter={roundCounter} />
-          <Tracks tracks={tracks} guessTrack={guessTrack} />
+          <Tracks tracks={tracks} isTrackChosen={isTrackChosen} guessTrack={guessTrack} setIsTrackChosen={setIsTrackChosen} />
         </>
       )}
     </>
   );
 }
 
-function Tracks({ tracks, guessTrack }: TracksProps) {
+function Tracks({ tracks, isTrackChosen, guessTrack, setIsTrackChosen }: TracksProps) {
   return (
     <>
       <section className="track-display">
-        {tracks.map((track) => <TrackCard key={track.id} track={track} guessTrack={guessTrack} />)}
+        {tracks.map((track) => (
+          <TrackCard
+            key={track.id}
+            track={track}
+            isTrackChosen={isTrackChosen}
+            guessTrack={guessTrack}
+            setIsTrackChosen={setIsTrackChosen}
+          />
+        ))}
       </section>
     </>
   );
@@ -91,5 +100,7 @@ function hasEmptyTracks(tracks: Track[]): boolean {
 
 type TracksProps = {
   tracks: Track[];
+  isTrackChosen: boolean;
   guessTrack: (e: SyntheticEvent, trackId: number) => void;
+  setIsTrackChosen: Dispatch<SetStateAction<boolean>>;
 };
