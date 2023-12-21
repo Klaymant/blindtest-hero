@@ -69,7 +69,7 @@
   }
 
   button {
-    font-family: 'Walkway';
+    font-family: var(--text-font);
     letter-spacing: 0.8px;
   }
 
@@ -92,7 +92,7 @@
     text-align: left;
     color: var(--primary);
     margin-bottom: 1rem;
-    font-family: 'Engcomica';
+    font-family: var(--title-font);
   }
 
   #screen-title p {
