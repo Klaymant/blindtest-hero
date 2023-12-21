@@ -1,0 +1,66 @@
+@media screen {
+  .track-display {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .track-display img {
+    border-radius: 5px 5px 0px 0px;
+    max-width: 10rem;
+  }
+
+  .track-display button {
+    color: white;
+    border: 0;
+    background-color: black;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+    
+
+  .track-display button p {
+    color: white;
+    border-radius: 0px 0px 5px 5px;
+    padding: 0.25rem;
+  }
+
+  @media screen and (min-width: 501px) {
+    .track-display button {
+      box-shadow: 0 0 8px 0px #636363;
+      transition: 0.3s;
+    }
+
+    .track-display button:hover {
+      box-shadow: 0 0 8px 2px var(--primary);
+    }
+  }
+
+  @media screen and (max-width: 500px) {
+    .track-display {
+      flex-direction: column;
+    }
+
+    .track-display button {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-align: left;
+      color: white;
+      background-color: var(--primary);
+      padding: 0;
+      border-radius: 5px;
+      margin-right: 1rem;
+      margin-left: 1rem;
+      cursor: pointer;
+    }
+
+    .track-display img {
+      border: solid 2px var(--primary);
+      border-radius: 5px 0px 0px 5px;
+      max-width: 5rem;
+    }
+  }
+}

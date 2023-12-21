@@ -78,27 +78,6 @@
     justify-content: center;
   }
 
-  #screen-title {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 90vh;
-    font-family: var(--text-font);
-    text-align: left;
-  }
-
-  #screen-title h2 {
-    text-align: left;
-    color: var(--primary);
-    margin-bottom: 1rem;
-    font-family: var(--title-font);
-  }
-
-  #screen-title p {
-    font-size: 1.25rem;
-  }
-
   button.game-navigation {
     border: 0;
     border-radius: 5px;
@@ -118,7 +97,7 @@
   }
 
   .counter {
-    margin-bottom: 2rem;
+    margin: 1rem 0;
   }
 
   .counter span {
@@ -142,34 +121,6 @@
     justify-content: center;
     text-align: center;
     gap: 1rem;
-  }
-
-  .track-display {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    text-align: center;
-    gap: 1rem;
-  }
-
-  .track-display img {
-    border-radius: 5px 5px 0px 0px;
-    max-width: 10rem;
-  }
-
-  .track-display button {
-    color: white;
-    border: 0;
-    background-color: black;
-    border-radius: 8px;
-    cursor: pointer;
-  }
-    
-
-  .track-display button p {
-    color: white;
-    border-radius: 0px 0px 5px 5px;
-    padding: 0.25rem;
   }
 
   #play-data {
@@ -196,137 +147,5 @@
 
   .real-track {
     animation: realTrack 1.5s ease-in-out 1;
-  }
-
-  #audio-controls {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 0.5rem;
-  }
-
-  #audio-controls {
-    justify-content: center;
-  }
-
-  #audio-controls button {
-    display: flex;
-    border: none;
-    border-radius: 4px;
-    padding: 0.25rem;
-    cursor: pointer;
-  }
-
-  .text-center {
-    text-align: center;
-  }
-
-  @media screen and (min-width: 501px) {
-    main p {
-      text-align: center;
-    }
-
-    .track-display button {
-      box-shadow: 0 0 8px 0px #636363;
-      transition: 0.3s;
-    }
-
-    .track-display button:hover {
-      box-shadow: 0 0 8px 2px var(--primary);
-    }
-  }
-
-  @media screen and (max-width: 500px) {
-    .track-display {
-      flex-direction: column;
-    }
-
-    .track-display button {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      text-align: left;
-      color: white;
-      background-color: var(--primary);
-      padding: 0;
-      border-radius: 5px;
-      margin-right: 1rem;
-      margin-left: 1rem;
-      cursor: pointer;
-    }
-
-    .track-display img {
-      border: solid 2px var(--primary);
-      border-radius: 5px 0px 0px 5px;
-      max-width: 5rem;
-    }
-
-    #screen-title, #screen-title h2 {
-      text-align: center;
-    }
-
-    #screen-title div {
-      margin: 0 0.5rem;
-    }
-  }
-
-  @keyframes success {
-    0% { border-color: green }
-  }
-
-  @keyframes realTrack {
-    0% {
-      opacity: 0;
-    }
-    25% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0;
-    }
-    75% {
-      opacity: 1;
-    }
-  }
-
-  @keyframes fail {
-    0% {
-      transform: translateX(0px);
-      filter: brightness(0) invert(17%) sepia(91%) saturate(2957%) hue-rotate(343deg) brightness(98%) contrast(97%);
-    }
-    25% {
-      transform: translateX(5px);
-      filter: brightness(0) invert(17%) sepia(91%) saturate(2957%) hue-rotate(343deg) brightness(98%) contrast(97%);
-    }
-    50% {
-      transform: translateX(-5px);
-      filter: brightness(0) invert(17%) sepia(91%) saturate(2957%) hue-rotate(343deg) brightness(98%) contrast(97%);
-    }
-    75% {
-      transform: translateX(5px);
-      filter: brightness(0) invert(17%) sepia(91%) saturate(2957%) hue-rotate(343deg) brightness(98%) contrast(97%);
-    }
-    100% {
-      transform: translateX(0px);
-      filter: brightness(0) invert(17%) sepia(91%) saturate(2957%) hue-rotate(343deg) brightness(98%) contrast(97%);
-    }
-  }
-
-  @keyframes switchToGreen {
-    0% {
-      filter: brightness(0) invert(69%) sepia(90%) saturate(1484%) hue-rotate(84deg) brightness(101%) contrast(105%);
-    }
-  }
-
-  @keyframes glowUp {
-    0% {
-      box-shadow: 0 0 8px -3px var(--primary);
-    }
-    50% {
-      box-shadow: 0 0 8px 5px white;
-    }
-    100% {
-      box-shadow: 0 0 8px -3px var(--primary);
-    }
   }
 }

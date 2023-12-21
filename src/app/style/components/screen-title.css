@@ -1,0 +1,32 @@
+@media screen {
+  #screen-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+    font-family: var(--text-font);
+    text-align: left;
+  }
+
+  #screen-title h2 {
+    text-align: left;
+    color: var(--primary);
+    margin-bottom: 1rem;
+    font-family: var(--title-font);
+  }
+
+  #screen-title p {
+    font-size: 1.25rem;
+  }
+
+  @media screen and (max-width: 500px) {
+    #screen-title, #screen-title h2 {
+      text-align: center;
+    }
+
+    #screen-title div {
+      margin: 0 0.5rem;
+    }
+  }
+}

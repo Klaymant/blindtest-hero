@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
 import type { Metadata } from 'next';
-import './style/globals.css';
-import './style/range-input.css';
+import './styleImports';
 
 export const metadata: Metadata = {
   title: 'Blindtest Hero',
