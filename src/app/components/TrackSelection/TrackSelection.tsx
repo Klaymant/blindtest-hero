@@ -12,8 +12,9 @@ export function TrackSelection() {
     chosenTrack,
     audioPreview,
     loading,
+    roundCounter,
     regenerateTracks,
-    resetCurrentAudioPreviewTime,
+    resetRoundCounter,
   } = useTracksContext();
   const { lives, increaseScore, loseLife, setScreenSelection } = useBlindtestContext();
 
@@ -34,7 +35,7 @@ export function TrackSelection() {
 
     setTimeout(() => {
       if (currentLives > 0) {
-        resetCurrentAudioPreviewTime();
+        resetRoundCounter();
         regenerateTracks();
       } else
         setScreenSelection('game-over');
@@ -47,7 +48,7 @@ export function TrackSelection() {
       {!loading && hasEmptyTracks(tracks) && <NoMoreTrack />}
       {!loading && !hasEmptyTracks(tracks) && (
         <>
-          <AudioPreviewCounter currentTime={audioPreview?.currentTime || 0} />
+          <AudioPreviewCounter counter={roundCounter} />
           <Tracks tracks={tracks} guessTrack={guessTrack} />
         </>
       )}
@@ -65,9 +66,7 @@ function Tracks({ tracks, guessTrack }: TracksProps) {
   );
 }
 
-function AudioPreviewCounter({ currentTime }: { currentTime: number }) {
-  const counter = currentTime > 30 ? 0 : Math.floor(30 - currentTime);
-
+function AudioPreviewCounter({ counter }: { counter: number }) {
   return (
     <p className="counter">
       <span className={`${counter > 0 && 'glow-up'}`}>{counter}</span>

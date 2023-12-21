@@ -6,8 +6,9 @@ import { Randomizer } from "@/app/utils/Randomizer";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { TrackApiFetcher } from "@/app/services/TrackApiFetcher";
 import { AudioHandler } from "@/app/services/AudioHandler";
+import { ScreenSelection } from "@/app/types/ScreenSelection";
 
-function useTrackDisplay({ soundOptions, setSoundOptions }: UseTrackDisplayParams) {
+function useTrackDisplay({ soundOptions, lives, setSoundOptions, setScreenSelection, loseLife }: UseTrackDisplayParams) {
   const [loading, setLoading] = useState(false);
   const [tracks, setTracks] = useState<Track[]>([]);
   const [roundTracks, setRoundTracks] = useState<Track[]>([]);
@@ -15,7 +16,7 @@ function useTrackDisplay({ soundOptions, setSoundOptions }: UseTrackDisplayParam
   const [audioPreview, setAudioPreview] = useState<HTMLAudioElement>();
   const [nextRoundFlag, setNextRoundFlag] = useState(false);
   const [generatedIds, setGeneratedIds] = useState<number[]>([]);
-  const [currentAudioPreviewTime, setCurrentAudioPreviewTime] = useState(0);
+  const [roundCounter, setRoundCounter] = useState(GAME_CONFIG.roundDurationInSeconds);
 
   useEffect(function fetchChartTracks() {
     setLoading(true);
@@ -63,18 +64,29 @@ function useTrackDisplay({ soundOptions, setSoundOptions }: UseTrackDisplayParam
   }, [audioPreview]);
 
   useEffect(function delayAudioTimer() {
-    if (audioPreview && currentAudioPreviewTime <= 30) {
+    if (audioPreview && roundCounter > 0) {
       const timer = setInterval(() => {
-        setCurrentAudioPreviewTime(audioPreview.currentTime);
+        setRoundCounter((prev) => prev - 1);
       }, 1000);
 
       return () => clearInterval(timer);
     }
-  }, [audioPreview, currentAudioPreviewTime]);
+  }, [audioPreview, roundCounter]);
+
+  useEffect(function checkRoundCounter() {
+    if (audioPreview && roundCounter === 0) {
+      if (lives > 1) {
+        loseLife();
+        regenerateTracks();
+      } else
+        setScreenSelection('game-over');
+    }
+  }, [audioPreview, roundCounter]);
 
   function regenerateTracks() {
     setRoundTracks([]);
     setNextRoundFlag((prev) => !prev);
+    resetRoundCounter();
     audioPreview?.pause();
   }
 
@@ -123,8 +135,8 @@ function useTrackDisplay({ soundOptions, setSoundOptions }: UseTrackDisplayParam
     }
   }
 
-  function resetCurrentAudioPreviewTime() {
-    setCurrentAudioPreviewTime(0);
+  function resetRoundCounter() {
+    setRoundCounter(GAME_CONFIG.roundDurationInSeconds);
   }
 
   return {
@@ -132,20 +144,23 @@ function useTrackDisplay({ soundOptions, setSoundOptions }: UseTrackDisplayParam
     chosenTrack,
     loading,
     audioPreview,
-    currentAudioPreviewTime,
+    roundCounter,
     changeVolume,
     increaseVolume,
     decreaseVolume,
     setAudioPreview,
-    resetCurrentAudioPreviewTime,
+    resetRoundCounter,
     regenerateTracks,
     mute,
   };
 }
 
 type UseTrackDisplayParams = {
+  lives: number;
   soundOptions: SoundOptions;
+  setScreenSelection: Dispatch<SetStateAction<ScreenSelection>>;
   setSoundOptions: Dispatch<SetStateAction<SoundOptions>>;
+  loseLife: () => void;
 };
 
 export { useTrackDisplay }

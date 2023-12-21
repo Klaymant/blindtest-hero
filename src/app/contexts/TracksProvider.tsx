@@ -27,9 +27,9 @@ type TracksContextType = {
   tracks: Track[];
   chosenTrack: Track | undefined;
   audioPreview: HTMLAudioElement | undefined;
-  currentAudioPreviewTime: number;
+  roundCounter: number;
   regenerateTracks: () => void;
-  resetCurrentAudioPreviewTime: () => void;
+  resetRoundCounter: () => void;
 };
 
 type TracksProviderProps = {

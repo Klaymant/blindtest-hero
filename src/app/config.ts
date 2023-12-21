@@ -4,6 +4,7 @@ const GAME_CONFIG = {
   chartLimit: 300,
   timeBeforeNextRoundInMs: 1500,
   defaultAudioPreviewVolume: 0.3,
+  roundDurationInSeconds: 30,
 };
 
 const ENV_VARIABLES = {

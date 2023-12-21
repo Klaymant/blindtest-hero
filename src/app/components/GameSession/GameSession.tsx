@@ -6,20 +6,20 @@ import { AudioControls } from "../AudioControls";
 import { useGameSession } from "./GameSession.hooks";
 
 function GameSession() {
-  const { score, lives, soundOptions, setSoundOptions } = useBlindtestContext();
+  const { score, lives, soundOptions, setSoundOptions, setScreenSelection, loseLife } = useBlindtestContext();
   const {
     roundTracks,
     chosenTrack,
     loading,
     audioPreview,
-    currentAudioPreviewTime,
+    roundCounter,
     regenerateTracks,
-    resetCurrentAudioPreviewTime,
+    resetRoundCounter,
     mute,
     changeVolume,
     increaseVolume,
     decreaseVolume,
-  } = useTrackDisplay({ soundOptions, setSoundOptions });
+  } = useTrackDisplay({ soundOptions, lives, setSoundOptions, setScreenSelection, loseLife });
   useGameSession({ mute, increaseVolume, decreaseVolume });
 
   return (
@@ -29,9 +29,9 @@ function GameSession() {
         chosenTrack={chosenTrack}
         loading={loading}
         audioPreview={audioPreview}
-        currentAudioPreviewTime={currentAudioPreviewTime}
+        roundCounter={roundCounter}
         regenerateTracks={regenerateTracks}
-        resetCurrentAudioPreviewTime={resetCurrentAudioPreviewTime}
+        resetRoundCounter={resetRoundCounter}
       >
         <section id="play-data">
           <p id="score">Score: <span>{score}</span></p>
