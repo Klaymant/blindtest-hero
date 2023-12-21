@@ -14,7 +14,7 @@ function ScreenTitle() {
         <p>Challenge yourself on your musical skills by picking the right song in each round.</p>
         <p>When you're good, your score goes up, otherwise you lose a life.</p>
         <p>Do your best to get the best score!</p>
-        <button type="button" onClick={playBlindtest}>Play</button>
+        <button type="button" className="game-navigation" onClick={playBlindtest}>Play</button>
       </div>
     </section>
   );

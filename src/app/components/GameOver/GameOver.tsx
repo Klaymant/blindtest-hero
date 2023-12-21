@@ -10,9 +10,11 @@ function GameOver() {
 
   return (
     <section id="game-over">
-      <h2>Game over</h2>
-      <p>You reached {score} points! Well done!</p>
-      <button type="button" onClick={replay}>Play again</button>
+      <div>
+        <h2>Game over</h2>
+        <p>You reached {score} points! Well done!</p>
+        <button type="button" className="game-navigation" onClick={replay}>Play again</button>
+      </div>
     </section>
   );
 }
