@@ -11,30 +11,34 @@ import heartIcon from '../../../../public/heart.png';
 function GameSession() {
   const { round, lives, soundOptions, setSoundOptions, setScreenSelection, loseLife } = useBlindtestContext();
   const {
-    roundTracks,
-    chosenTrack,
-    loading,
     audioPreview,
+    chosenTrack,
+    isTrackChosen,
+    loading,
     roundCounter,
+    roundTracks,
+    changeVolume,
+    decreaseVolume,
+    increaseVolume,
+    mute,
     regenerateTracks,
     resetRoundCounter,
-    mute,
-    changeVolume,
-    increaseVolume,
-    decreaseVolume,
+    setIsTrackChosen,
   } = useTrackDisplay({ soundOptions, lives, setSoundOptions, setScreenSelection, loseLife });
   useGameSession({ mute, increaseVolume, decreaseVolume });
 
   return (
     <>
       <TracksProvider
-        tracks={roundTracks}
-        chosenTrack={chosenTrack}
-        loading={loading}
         audioPreview={audioPreview}
+        chosenTrack={chosenTrack}
+        isTrackChosen={isTrackChosen}
+        loading={loading}
+        tracks={roundTracks}
         roundCounter={roundCounter}
         regenerateTracks={regenerateTracks}
         resetRoundCounter={resetRoundCounter}
+        setIsTrackChosen={setIsTrackChosen}
       >
         <section id="play-data">
           <p id="round">Round <span className="appear">{round}</span></p>

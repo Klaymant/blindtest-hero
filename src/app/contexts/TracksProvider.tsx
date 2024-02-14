@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useContext } from "react";
+import { Dispatch, ReactNode, SetStateAction, createContext, useContext } from "react";
 import { Track } from "../types/Track";
 
 const TracksContext = createContext<TracksContextType | null>(null);
@@ -23,13 +23,15 @@ function TracksProvider(props: TracksProviderProps) {
 }
 
 type TracksContextType = {
+  audioPreview: HTMLAudioElement | undefined;
+  chosenTrack: Track | undefined;
+  isTrackChosen: boolean;
   loading: boolean;
   tracks: Track[];
-  chosenTrack: Track | undefined;
-  audioPreview: HTMLAudioElement | undefined;
   roundCounter: number;
   regenerateTracks: () => void;
   resetRoundCounter: () => void;
+  setIsTrackChosen: Dispatch<SetStateAction<boolean>>;
 };
 
 type TracksProviderProps = {

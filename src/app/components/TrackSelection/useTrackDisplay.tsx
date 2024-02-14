@@ -17,6 +17,7 @@ function useTrackDisplay({ soundOptions, lives, setSoundOptions, setScreenSelect
   const [nextRoundFlag, setNextRoundFlag] = useState(false);
   const [generatedIds, setGeneratedIds] = useState<number[]>([]);
   const [roundCounter, setRoundCounter] = useState(GAME_CONFIG.roundDurationInSeconds);
+  const [isTrackChosen, setIsTrackChosen] = useState(false);
 
   useEffect(function fetchChartTracks() {
     setLoading(true);
@@ -63,15 +64,15 @@ function useTrackDisplay({ soundOptions, lives, setSoundOptions, setScreenSelect
     }
   }, [audioPreview]);
 
-  useEffect(function delayAudioTimer() {
-    if (audioPreview && roundCounter > 0) {
+  useEffect(function countdownRound() {
+    if (audioPreview && roundCounter > 0 && !isTrackChosen) {
       const timer = setInterval(() => {
         setRoundCounter((prev) => prev - 1);
       }, 1000);
 
       return () => clearInterval(timer);
     }
-  }, [audioPreview, roundCounter]);
+  }, [audioPreview, roundCounter, isTrackChosen]);
 
   useEffect(function checkRoundCounter() {
     if (audioPreview && roundCounter === 0) {
@@ -146,18 +147,20 @@ function useTrackDisplay({ soundOptions, lives, setSoundOptions, setScreenSelect
   }
 
   return {
-    roundTracks,
-    chosenTrack,
-    loading,
     audioPreview,
+    chosenTrack,
+    isTrackChosen,
+    loading,
     roundCounter,
+    roundTracks,
     changeVolume,
-    increaseVolume,
     decreaseVolume,
-    setAudioPreview,
-    resetRoundCounter,
-    regenerateTracks,
+    increaseVolume,
     mute,
+    setAudioPreview,
+    setIsTrackChosen,
+    regenerateTracks,
+    resetRoundCounter,
   };
 }
 

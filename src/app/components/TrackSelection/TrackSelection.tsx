@@ -8,14 +8,15 @@ import { GAME_CONFIG } from "@/app/config";
 
 export function TrackSelection() {
   const {
-    tracks,
     chosenTrack,
+    isTrackChosen,
     loading,
+    tracks,
     regenerateTracks,
     resetRoundCounter,
+    setIsTrackChosen,
   } = useTracksContext();
   const { lives, increaseRound, loseLife, setScreenSelection } = useBlindtestContext();
-  const [isTrackChosen, setIsTrackChosen] = useState(false);
 
   function guessTrack(e: SyntheticEvent, trackId: number) {
     let currentLives = lives;
