@@ -1,7 +1,8 @@
 :root {
   --pink-fresh: rgb(255, 0, 102);
+  --pop-purple: rgb(127, 30, 151);
 
-  --primary: var(--pink-fresh);
+  --primary: var(--pop-purple);
   --foreground-rgb: 255, 255, 255;
   --background-start-rgb: 0, 0, 0;
   --background-end-rgb: 20, 0, 20;
