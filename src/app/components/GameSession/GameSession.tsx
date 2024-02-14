@@ -67,7 +67,7 @@ function LivesCounter({ lives }: { lives: number }) {
   return (
     <p className="text-icon">
     <div className="text-icon-wrapper">
-      <Image src={heartIcon} alt="heart" />
+      <Image src={heartIcon} alt="heart" className={`grow-up-${lives}`} />
       <span>{lives}</span>
     </div>
   </p>

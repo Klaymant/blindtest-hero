@@ -67,4 +67,13 @@
       transform: rotate(180deg);
     }
   }
+
+  @keyframes growUp {
+    0% {
+      transform: scale(0.9);
+    }
+    100% {
+      transform: scale(1.1);
+    }
+  }
 }
