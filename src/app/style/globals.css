@@ -1,25 +1,7 @@
-@font-face {
-  font-family: 'Engcomica';
-  src: url("../../../public/fonts/Engcomica.otf"),
-}
-
-@font-face {
-  font-family: 'Walkway';
-  src: url('../../../public/fonts/Walkway\ UltraBold.ttf');
-}
+@import url('./font.css');
+@import url('./colors.css');
 
 @media screen {
-  :root {
-    --pink-fresh: rgb(255, 0, 102);
-
-    --primary: var(--pink-fresh);
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 20, 0, 20;
-    --title-font: 'Engcomica';
-    --text-font: 'Walkway';
-  }
-
   * {
     box-sizing: border-box;
     padding: 0;
@@ -96,23 +78,26 @@
     color: white;
   }
 
-  .counter {
-    margin: 1rem 0;
-  }
-
-  .counter span {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50px;
-    width: 50px;
-    background: var(--primary);
-    border-radius: 9999px;
-    margin: auto;
+  .end {
+    color: red;
   }
 
   .glow-up {
     animation: glowUp 2s ease-in-out infinite;
+  }
+
+  .turn-over {
+    animation: turnOver 2s ease-in-out infinite;
+  }
+
+  .turn-over-fast {
+    animation: turnOver 1s ease-in-out infinite;
+  }
+
+  #round {
+    font-size: 2rem;
+    text-shadow: var(--primary) 2px 4px 1px;
+    font-weight: 600;
   }
 
   #game-over {
@@ -124,8 +109,7 @@
   }
 
   #play-data {
-    margin-left: 1rem;
-    margin-bottom: 2rem;
+    margin: 1rem 0;
   }
 
   #play-data {

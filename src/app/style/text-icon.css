@@ -1,0 +1,32 @@
+.text-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+
+.text-icon-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  background-color: white;
+  border: solid 2px var(--primary);
+  border-radius: 9999px;
+  padding: 0.25rem;
+}
+
+.text-icon img {
+  height: 20px;
+  width: 20px;
+  background-color: white;
+  border-radius: 9999px;
+}
+
+.text-icon span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20px;
+  width: 20px;
+}

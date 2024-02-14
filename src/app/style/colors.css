@@ -1,0 +1,10 @@
+:root {
+  --pink-fresh: rgb(255, 0, 102);
+
+  --primary: var(--pink-fresh);
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 20, 0, 20;
+  --title-font: 'Engcomica';
+  --text-font: 'Walkway';
+}

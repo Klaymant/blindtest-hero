@@ -27,6 +27,7 @@ type BlindtestContextType = {
   round: number;
   lives: number;
   screenSelection: ScreenSelection;
+  screenSelectionMap: Record<ScreenSelection, ReactNode>;
   soundOptions: SoundOptions;
   increaseRound: (increase: number) => void;
   loseLife: () => void;

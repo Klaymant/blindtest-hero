@@ -4,6 +4,9 @@ import { useTrackDisplay } from "../TrackSelection/useTrackDisplay";
 import { TracksProvider } from "@/app/contexts/TracksProvider";
 import { AudioControls } from "../AudioControls";
 import { useGameSession } from "./GameSession.hooks";
+import Image from "next/image";
+import hourglassIcon from '../../../../public/hourglass.png';
+import heartIcon from '../../../../public/heart.png';
 
 function GameSession() {
   const { round, lives, soundOptions, setSoundOptions, setScreenSelection, loseLife } = useBlindtestContext();
@@ -34,10 +37,10 @@ function GameSession() {
         resetRoundCounter={resetRoundCounter}
       >
         <section id="play-data">
-          <AudioControls audioPreview={audioPreview} mute={mute} changeVolume={changeVolume} />
-          <AudioPreviewCounter counter={roundCounter} />
           <p id="round">Round <span className="appear">{round}</span></p>
-          <p id="lives">Lives: <span>{lives}</span></p>
+          <LivesCounter lives={lives} />
+          <AudioPreviewCounter counter={roundCounter} />
+          <AudioControls audioPreview={audioPreview} mute={mute} changeVolume={changeVolume} />
         </section>
         <TrackSelection />
       </TracksProvider>
@@ -47,9 +50,23 @@ function GameSession() {
 
 function AudioPreviewCounter({ counter }: { counter: number }) {
   return (
-    <p className="counter">
-      <span className={`${counter > 0 && 'glow-up'}`}>{counter}</span>
+    <p className="text-icon">
+      <div className="text-icon-wrapper">
+        <Image src={hourglassIcon} alt="hourglass" className={counter < 10 ? 'turn-over-fast' : 'turn-over'} />
+        <span className={counter < 10 ? 'end' : ''}>{counter}</span>
+      </div>
     </p>
+  );
+}
+
+function LivesCounter({ lives }: { lives: number }) {
+  return (
+    <p className="text-icon">
+    <div className="text-icon-wrapper">
+      <Image src={heartIcon} alt="heart" />
+      <span>{lives}</span>
+    </div>
+  </p>
   );
 }
 

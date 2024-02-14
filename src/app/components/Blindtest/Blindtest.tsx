@@ -1,36 +1,10 @@
 'use client';
-import { BlindtestProvider } from "@/app/contexts/BlindtestProvider"
-import { useBlindtest } from "./Blindtest.hooks";
+import { BlindtestProvider, useBlindtestContext } from "@/app/contexts/BlindtestProvider"
 
 function Blindtest() {
-  const {
-    round,
-    lives,
-    screenSelection,
-    screenSelectionMap,
-    soundOptions,
-    increaseRound,
-    loseLife,
-    setScreenSelection,
-    setSoundOptions,
-    resetGame,
-  } = useBlindtest();
+  const { screenSelection, screenSelectionMap } = useBlindtestContext();
 
-  return (
-    <BlindtestProvider
-      round={round}
-      lives={lives}
-      screenSelection={screenSelection}
-      soundOptions={soundOptions}
-      increaseRound={increaseRound}
-      loseLife={loseLife}
-      setScreenSelection={setScreenSelection}
-      setSoundOptions={setSoundOptions}
-      resetGame={resetGame}
-    >
-      {screenSelectionMap[screenSelection]}
-    </BlindtestProvider>
-  );
+  return screenSelectionMap[screenSelection];
 }
 
 export { Blindtest };
