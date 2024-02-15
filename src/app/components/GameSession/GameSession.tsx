@@ -41,7 +41,7 @@ function GameSession() {
         setIsTrackChosen={setIsTrackChosen}
       >
         <section id="play-data">
-          <h2 id="round">Round <span className="appear">{round}</span></h2>
+          <h2 key={round} id="round">Round <span className="appear">{round}</span></h2>
           <LivesCounter lives={lives} />
           <AudioPreviewCounter counter={roundCounter} />
           <AudioControls audioPreview={audioPreview} mute={mute} changeVolume={changeVolume} />

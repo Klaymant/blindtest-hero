@@ -77,6 +77,15 @@
     }
   }
 
+  @keyframes appear {
+    0% {
+      opacity: 0.1;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
   .glow-up {
     animation: glowUp 2s ease-in-out infinite;
   }
@@ -107,5 +116,9 @@
 
   .grow-up-1 {
     animation: growUp 0.75s alternate infinite;
+  }
+
+  .appear {
+    animation: appear 1s ease-in-out;
   }
 }
