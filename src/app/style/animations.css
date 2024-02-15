@@ -76,4 +76,36 @@
       transform: scale(1.1);
     }
   }
+
+  .glow-up {
+    animation: glowUp 2s ease-in-out infinite;
+  }
+
+  .turn-over {
+    animation: turnOver 2s ease-in-out infinite;
+  }
+
+  .turn-over-fast {
+    animation: turnOver 1s ease-in-out infinite;
+  }
+
+  .grow-up-5 {
+    animation: growUp 2s alternate infinite;
+  }
+
+  .grow-up-4 {
+    animation: growUp 1.5s alternate infinite;
+  }
+
+  .grow-up-3 {
+    animation: growUp 1.25s alternate infinite;
+  }
+
+  .grow-up-2 {
+    animation: growUp 1s alternate infinite;
+  }
+
+  .grow-up-1 {
+    animation: growUp 0.75s alternate infinite;
+  }
 }

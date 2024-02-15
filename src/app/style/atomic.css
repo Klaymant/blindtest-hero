@@ -1,3 +1,8 @@
 .text-center {
   text-align: center;
 }
+
+.important {
+  font-family: var(--text-font-bold);
+  color: var(--primary);
+}

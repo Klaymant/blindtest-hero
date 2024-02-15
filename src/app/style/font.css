@@ -7,3 +7,14 @@
   font-family: 'Walkway';
   src: url('../../../public/fonts/Walkway\ UltraBold.ttf');
 }
+
+@font-face {
+  font-family: 'WalkwayBold';
+  src: url('../../../public/fonts/Walkway\ Black.ttf');
+}
+
+html {
+  --title-font: 'Engcomica';
+  --text-font: 'Walkway';
+  --text-font-bold: 'WalkwayBold';
+}

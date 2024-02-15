@@ -12,7 +12,7 @@ function GameOver() {
     <section id="game-over">
       <div>
         <h2>Game over</h2>
-        <p>You reached round {round}! Well done!</p>
+        <p>You reached round <span className="important">{round}</span>! Well done!</p>
         <button type="button" className="game-navigation" onClick={replay}>Play again</button>
       </div>
     </section>

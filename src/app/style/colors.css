@@ -1,11 +1,11 @@
 :root {
   --pink-fresh: rgb(255, 0, 102);
   --pop-purple: rgb(127, 30, 151);
+  --pop-purple-light: rgb(142, 67, 161);
 
   --primary: var(--pop-purple);
+  --primary-light: var(--pop-purple-light);
   --foreground-rgb: 255, 255, 255;
   --background-start-rgb: 0, 0, 0;
   --background-end-rgb: 20, 0, 20;
-  --title-font: 'Engcomica';
-  --text-font: 'Walkway';
 }

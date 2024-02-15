@@ -1,19 +1,16 @@
 @media screen {
-  #screen-title {
+  main {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 90vh;
+    min-height: 100vh;
     font-family: var(--text-font);
     text-align: left;
   }
 
-  #screen-title h2 {
-    text-align: left;
-    color: var(--primary);
-    margin-bottom: 1rem;
-    font-family: var(--title-font);
+  #screen-title {
+    padding: 1rem;
   }
 
   #screen-title p {
@@ -21,10 +18,6 @@
   }
 
   @media screen and (max-width: 500px) {
-    #screen-title, #screen-title h2 {
-      text-align: center;
-    }
-
     #screen-title div {
       margin: 0 0.5rem;
     }
