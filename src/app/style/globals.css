@@ -17,7 +17,6 @@
 
   html {
     --pop-shadow: var(--primary) 2px 4px 1px;
-    --pop-shadow-light: var(--primary-light) 2px 4px 1px;
   }
 
   body {
