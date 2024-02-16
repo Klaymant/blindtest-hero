@@ -1,11 +1,11 @@
 :root {
-  --pink-fresh: rgb(255, 0, 102);
-  --pop-purple: rgb(127, 30, 151);
+  --pink-fresh: #ff0066;
+  --pop-purple: #7f1e97;
   --pop-purple-dark: #DE83F5;
 
   --primary: var(--pop-purple);
   --primary-dark: var(--pop-purple-dark);
-  --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 0, 0, 0;
-  --background-end-rgb: 20, 0, 20;
+  --foreground-rgb: #ffffff;
+  --background-start-rgb: #000000;
+  --background-end-rgb: #140014;
 }

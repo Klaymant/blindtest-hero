@@ -9,26 +9,20 @@
   }
 
   @keyframes realTrack {
-    0% {
+    0%, 50% {
       opacity: 0;
     }
-    25% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0;
-    }
-    75% {
+    25%, 75% {
       opacity: 1;
     }
   }
 
   @keyframes fail {
-    0% {
+    0%, 100% {
       transform: translateX(0px);
       filter: var(--filter-red);
     }
-    25% {
+    25%, 75% {
       transform: translateX(5px);
       filter: var(--filter-red);
     }
@@ -36,31 +30,11 @@
       transform: translateX(-5px);
       filter: var(--filter-red);
     }
-    75% {
-      transform: translateX(5px);
-      filter: var(--filter-red);
-    }
-    100% {
-      transform: translateX(0px);
-      filter: var(--filter-red);
-    }
   }
 
   @keyframes switchToGreen {
     0%, 100% {
       filter: var(--filter-green);
-    }
-  }
-
-  @keyframes glowUp {
-    0% {
-      box-shadow: 0 0 8px -3px var(--primary);
-    }
-    50% {
-      box-shadow: 0 0 8px 5px white;
-    }
-    100% {
-      box-shadow: 0 0 8px -3px var(--primary);
     }
   }
 
@@ -89,10 +63,6 @@
     100% {
       opacity: 1;
     }
-  }
-
-  .glow-up {
-    animation: glowUp 2s ease-in-out infinite;
   }
 
   .turn-over {

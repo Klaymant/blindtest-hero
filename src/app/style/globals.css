@@ -20,13 +20,13 @@
   }
 
   body {
-    color: rgb(var(--foreground-rgb));
+    color: var(--foreground-rgb);
     background: linear-gradient(
         to bottom,
         transparent,
-        rgb(var(--background-end-rgb))
+        var(--background-end-rgb)
       )
-      rgb(var(--background-start-rgb));
+      var(--background-start-rgb);
     font-family: 'Engcomica';
   }
 
@@ -73,7 +73,7 @@
   }
 
   button.game-navigation:hover {
-    box-shadow: rgba(255, 255, 255, 0.2) 0px 20px 30px;
+    box-shadow: #ffffff33 0px 20px 30px;
   }
 
   .end {
