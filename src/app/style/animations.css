@@ -1,4 +1,9 @@
 @media screen {
+  html {
+    --filter-red: brightness(0) invert(17%) sepia(91%) saturate(2957%) hue-rotate(343deg) brightness(98%) contrast(97);
+    --filter-green: brightness(0) invert(69%) sepia(90%) saturate(1484%) hue-rotate(84deg) brightness(101%) contrast(105%);
+  }
+
   @keyframes success {
     0% { border-color: green }
   }
@@ -21,29 +26,29 @@
   @keyframes fail {
     0% {
       transform: translateX(0px);
-      filter: brightness(0) invert(17%) sepia(91%) saturate(2957%) hue-rotate(343deg) brightness(98%) contrast(97%);
+      filter: var(--filter-red);
     }
     25% {
       transform: translateX(5px);
-      filter: brightness(0) invert(17%) sepia(91%) saturate(2957%) hue-rotate(343deg) brightness(98%) contrast(97%);
+      filter: var(--filter-red);
     }
     50% {
       transform: translateX(-5px);
-      filter: brightness(0) invert(17%) sepia(91%) saturate(2957%) hue-rotate(343deg) brightness(98%) contrast(97%);
+      filter: var(--filter-red);
     }
     75% {
       transform: translateX(5px);
-      filter: brightness(0) invert(17%) sepia(91%) saturate(2957%) hue-rotate(343deg) brightness(98%) contrast(97%);
+      filter: var(--filter-red);
     }
     100% {
       transform: translateX(0px);
-      filter: brightness(0) invert(17%) sepia(91%) saturate(2957%) hue-rotate(343deg) brightness(98%) contrast(97%);
+      filter: var(--filter-red);
     }
   }
 
   @keyframes switchToGreen {
-    0% {
-      filter: brightness(0) invert(69%) sepia(90%) saturate(1484%) hue-rotate(84deg) brightness(101%) contrast(105%);
+    0%, 100% {
+      filter: var(--filter-green);
     }
   }
 
