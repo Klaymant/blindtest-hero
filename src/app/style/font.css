@@ -14,7 +14,7 @@
 }
 
 html {
-  --title-font: 'Engcomica';
-  --text-font: 'Walkway';
-  --text-font-bold: 'WalkwayBold';
+  --title-font: 'Engcomica', Calibri, sans-serif;
+  --text-font: 'Walkway', Calibri, sans-serif;
+  --text-font-bold: 'WalkwayBold', Calibri, sans-serif;
 }
