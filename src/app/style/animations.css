@@ -94,6 +94,6 @@
   }
 
   .appear {
-    animation: appear 1s ease-in-out;
+    animation: appear var(--delay, 1s) ease-in-out 1;
   }
 }

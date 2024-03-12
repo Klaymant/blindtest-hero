@@ -1,11 +1,13 @@
 'use client';
+
 import { Track } from "@/app/types/Track";
 import { useBlindtestContext } from "@/app/contexts/BlindtestProvider";
-import { Dispatch, SetStateAction, SyntheticEvent } from "react";
+import { CSSProperties, Dispatch, SetStateAction, SyntheticEvent, useEffect } from "react";
 import { useTracksContext } from "@/app/contexts/TracksProvider";
 import { TrackCard } from "./Track";
 import { GAME_CONFIG } from "@/app/config";
 import './TrackSelection.css';
+import { useAnimate } from "@/app/hooks/useAnimate";
 
 export function TrackSelection() {
   const {
@@ -58,9 +60,13 @@ export function TrackSelection() {
 }
 
 function Tracks({ tracks, isTrackChosen, guessTrack, setIsTrackChosen }: TracksProps) {
+  const [sectionRef, appearanceCallback] = useAnimate('appear');
+
+  useEffect(appearanceCallback, [tracks]);
+
   return (
     <>
-      <section className="track-display">
+      <section ref={sectionRef} className="track-display" style={{ '--delay': '0.5s' } as CSSProperties }>
         {tracks.map((track) => (
           <TrackCard
             key={track.id}

@@ -1,6 +1,6 @@
 import { Track } from "@/app/types/Track";
 import { StringModifier } from "@/app/utils/StringModifier";
-import { Dispatch, SetStateAction, SyntheticEvent, useState } from "react";
+import { Dispatch, SetStateAction, SyntheticEvent } from "react";
 
 export function TrackCard({ track, isTrackChosen, guessTrack, setIsTrackChosen }: Props) {
   const coverAltText = `Cover of ${track.title} by ${track.artist.name}`;
