@@ -1,4 +1,3 @@
-
 const Randomizer = {
   generateNbs(amount: number, maxValue: number, valuesToExclude: number[]): number[] {
     const randomNbs: number[] = [];

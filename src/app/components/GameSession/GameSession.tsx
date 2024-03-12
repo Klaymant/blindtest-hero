@@ -1,6 +1,6 @@
 import { useBlindtestContext } from "@/app/contexts/BlindtestProvider";
 import { TrackSelection } from "../TrackSelection/TrackSelection";
-import { useTrackDisplay } from "../TrackSelection/useTrackDisplay";
+import { useTrackDisplay } from "../../hooks/useTrackDisplay";
 import { TracksProvider } from "@/app/contexts/TracksProvider";
 import { AudioControls } from "../AudioControls/AudioControls";
 import { useGameSession } from "./GameSession.hooks";
