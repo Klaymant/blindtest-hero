@@ -18,7 +18,7 @@ function useBlindtest() {
     'home': <ScreenTitle />,
     'game': <GameSession />,
     'game-over': <GameOver />,
-  }
+  };
 
   function increaseRound(increase: number) {
     setRound((prev) => prev + increase);
@@ -44,7 +44,7 @@ function useBlindtest() {
     setScreenSelection,
     setSoundOptions,
     resetGame,
-  }
+  };
 }
 
 export { useBlindtest };

@@ -42,8 +42,10 @@ function GameSession() {
       >
         <section id="play-data">
           <h2 key={round} id="round">Round <span className="appear">{round}</span></h2>
-          <LivesCounter lives={lives} />
-          <AudioPreviewCounter counter={roundCounter} />
+          <div>
+            <LivesCounter lives={lives} />
+            <AudioPreviewCounter counter={roundCounter} />
+          </div>
           <AudioControls audioPreview={audioPreview} mute={mute} changeVolume={changeVolume} />
         </section>
         <TrackSelection />

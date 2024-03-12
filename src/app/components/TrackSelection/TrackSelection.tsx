@@ -1,7 +1,7 @@
 'use client';
 import { Track } from "@/app/types/Track";
 import { useBlindtestContext } from "@/app/contexts/BlindtestProvider";
-import { Dispatch, SetStateAction, SyntheticEvent, useState } from "react";
+import { Dispatch, SetStateAction, SyntheticEvent } from "react";
 import { useTracksContext } from "@/app/contexts/TracksProvider";
 import { TrackCard } from "./Track";
 import { GAME_CONFIG } from "@/app/config";

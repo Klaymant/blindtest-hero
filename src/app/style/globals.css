@@ -88,14 +88,6 @@
     gap: 1rem;
   }
 
-  #play-data {
-    margin: 1rem 0;
-  }
-
-  #play-data {
-    text-align: center;
-  }
-
   #score span, #lives span {
     font-weight: 600;
     color: var(--primary);
