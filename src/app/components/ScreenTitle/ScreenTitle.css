@@ -1,14 +1,4 @@
 @media screen {
-  main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    font-family: var(--text-font);
-    text-align: left;
-  }
-
   #screen-title {
     padding: 1rem;
   }

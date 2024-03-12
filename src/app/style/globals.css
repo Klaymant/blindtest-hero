@@ -30,6 +30,16 @@
     font-family: 'Engcomica';
   }
 
+  main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: var(--text-font);
+    text-align: left;
+  }
+
   h1 {
     display: inline-block;
     font-size: 2.5rem;

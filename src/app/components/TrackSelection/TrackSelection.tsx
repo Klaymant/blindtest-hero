@@ -5,6 +5,7 @@ import { Dispatch, SetStateAction, SyntheticEvent } from "react";
 import { useTracksContext } from "@/app/contexts/TracksProvider";
 import { TrackCard } from "./Track";
 import { GAME_CONFIG } from "@/app/config";
+import './TrackSelection.css';
 
 export function TrackSelection() {
   const {

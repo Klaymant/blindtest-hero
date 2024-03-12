@@ -1,4 +1,5 @@
 import { useBlindtestContext } from "@/app/contexts/BlindtestProvider";
+import './ScreenTitle.css';
 
 function ScreenTitle() {
   const { setScreenSelection } = useBlindtestContext();

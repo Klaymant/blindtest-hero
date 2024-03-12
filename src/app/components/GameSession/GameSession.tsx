@@ -2,11 +2,12 @@ import { useBlindtestContext } from "@/app/contexts/BlindtestProvider";
 import { TrackSelection } from "../TrackSelection/TrackSelection";
 import { useTrackDisplay } from "../TrackSelection/useTrackDisplay";
 import { TracksProvider } from "@/app/contexts/TracksProvider";
-import { AudioControls } from "../AudioControls";
+import { AudioControls } from "../AudioControls/AudioControls";
 import { useGameSession } from "./GameSession.hooks";
 import Image from "next/image";
 import hourglassIcon from '../../../../public/hourglass.png';
 import heartIcon from '../../../../public/heart.png';
+import './GameSession.css';
 
 function GameSession() {
   const { round, lives, soundOptions, setSoundOptions, setScreenSelection, loseLife } = useBlindtestContext();
