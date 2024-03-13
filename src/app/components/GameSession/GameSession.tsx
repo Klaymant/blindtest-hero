@@ -42,7 +42,7 @@ function GameSession() {
         setIsTrackChosen={setIsTrackChosen}
       >
         <section id="play-data">
-          <h2 key={round} id="round">Round <span className="appear">{round}</span></h2>
+          <h2 key={round} id="round">Round {round}</h2>
           <div>
             <LivesCounter lives={lives} />
             <AudioPreviewCounter counter={roundCounter} />
@@ -66,7 +66,7 @@ function AudioPreviewCounter({ counter }: { counter: number }) {
   );
 }
 
-function LivesCounter({ lives }: { lives: number }) {
+export function LivesCounter({ lives }: { lives: number }) {
   return (
     <p className="text-icon">
     <div className="text-icon-wrapper">

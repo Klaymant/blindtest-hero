@@ -86,7 +86,7 @@ function useTrackDisplay({ soundOptions, lives, setSoundOptions, setScreenSelect
           regenerateTracks();
         } else
           setScreenSelection('game-over');
-      }, GAME_CONFIG.timeBeforeNextRoundInMs);
+      }, GAME_CONFIG.timeBeforeRoundEndInMs);
     }
   }, [audioPreview, roundCounter]);
 

@@ -1,50 +1,24 @@
 'use client';
 
 import { Track } from "@/app/types/Track";
-import { useBlindtestContext } from "@/app/contexts/BlindtestProvider";
 import { CSSProperties, Dispatch, SetStateAction, SyntheticEvent, useEffect } from "react";
-import { useTracksContext } from "@/app/contexts/TracksProvider";
 import { TrackCard } from "./Track";
-import { GAME_CONFIG } from "@/app/config";
 import './TrackSelection.css';
 import { useAnimate } from "@/app/hooks/useAnimate";
+import { RoundBreak } from "../RoundBreak/RoundBreak";
+import { useTrackSelection } from "./TrackSelection.hook";
 
 export function TrackSelection() {
   const {
-    chosenTrack,
     isTrackChosen,
+    lives,
     loading,
+    round,
+    showRoundBreak,
     tracks,
-    regenerateTracks,
-    resetRoundCounter,
+    guessTrack,
     setIsTrackChosen,
-  } = useTracksContext();
-  const { lives, increaseRound, loseLife, setScreenSelection } = useBlindtestContext();
-
-  function guessTrack(e: SyntheticEvent, trackId: number) {
-    let currentLives = lives;
-
-    if (trackId === chosenTrack?.id) {
-      e.currentTarget.classList.add('success');
-      increaseRound(1);
-    } else {
-      const chosenTrackElement = document.getElementById(String(chosenTrack?.id));
-
-      e.currentTarget.classList.add('fail');
-      chosenTrackElement?.classList.add('real-track');
-      loseLife();
-      currentLives--;
-    }
-
-    setTimeout(() => {
-      if (currentLives > 0) {
-        resetRoundCounter();
-        regenerateTracks();
-        setIsTrackChosen(false);
-      } else
-        setScreenSelection('game-over');
-    }, GAME_CONFIG.timeBeforeNextRoundInMs);
-  }
+  } = useTrackSelection();
 
   return (
     <>
@@ -53,6 +27,7 @@ export function TrackSelection() {
       {!loading && !hasEmptyTracks(tracks) && (
         <>
           <Tracks tracks={tracks} isTrackChosen={isTrackChosen} guessTrack={guessTrack} setIsTrackChosen={setIsTrackChosen} />
+          {showRoundBreak && <RoundBreak round={round} lives={lives} />}
         </>
       )}
     </>

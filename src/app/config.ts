@@ -2,7 +2,7 @@ const GAME_CONFIG = {
   nbTracksToGuess: 4,
   nbLives: 5,
   chartLimit: 300,
-  timeBeforeNextRoundInMs: 1500,
+  timeBeforeRoundEndInMs: 1500,
   defaultAudioPreviewVolume: 0.3,
   roundDurationInSeconds: 30,
 };

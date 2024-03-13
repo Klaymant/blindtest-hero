@@ -1,0 +1,17 @@
+@media screen {
+  #round-break {
+    display: block;
+    z-index: 1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: black;
+  }
+
+  #round-break > div {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+  }
+}
