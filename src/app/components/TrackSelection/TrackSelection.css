@@ -9,7 +9,6 @@
 
   .track-display img {
     border-radius: 5px 5px 0px 0px;
-    max-width: 10rem;
   }
 
   .track-display button {
@@ -62,7 +61,6 @@
     .track-display img {
       border: solid 2px var(--primary);
       border-radius: 5px 0px 0px 5px;
-      max-width: 5rem;
     }
   }
 }
