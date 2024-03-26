@@ -3,6 +3,7 @@ const GAME_CONFIG = {
   nbLives: 5,
   chartLimit: 300,
   timeBeforeRoundEndInMs: 1500,
+  timeBeforeRoundBreakInMs: 2000,
   defaultAudioPreviewVolume: 0.3,
   roundDurationInSeconds: 30,
   scoreFactor: 100,
