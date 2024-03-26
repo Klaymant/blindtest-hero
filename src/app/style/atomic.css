@@ -6,3 +6,7 @@
   font-family: var(--text-font-bold);
   color: var(--primary-dark);
 }
+
+.color-primary {
+  color: var(--primary);
+}

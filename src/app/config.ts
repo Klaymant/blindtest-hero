@@ -5,6 +5,7 @@ const GAME_CONFIG = {
   timeBeforeRoundEndInMs: 1500,
   defaultAudioPreviewVolume: 0.3,
   roundDurationInSeconds: 30,
+  scoreFactor: 100,
 };
 
 const ENV_VARIABLES = {

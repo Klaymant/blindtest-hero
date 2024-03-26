@@ -1,7 +1,9 @@
 import { useBlindtestContext } from "@/app/contexts/BlindtestProvider";
+import './GameOver.css';
+import { NumberModifier } from "@/app/utils/NumberModifier";
 
 function GameOver() {
-  const { round, setScreenSelection, resetGame } = useBlindtestContext();
+  const { score, setScreenSelection, resetGame } = useBlindtestContext();
 
   function replay() {
     resetGame();
@@ -12,7 +14,9 @@ function GameOver() {
     <section id="game-over">
       <div>
         <h2>Game over</h2>
-        <p>You reached round <span className="important">{round}</span>! Well done!</p>
+        <p>You reached a score of</p>
+        <p id="score">{NumberModifier.separateThousands(score)}</p>
+        <p>Well done!</p>
         <button type="button" className="game-navigation" onClick={replay}>Play again</button>
       </div>
     </section>

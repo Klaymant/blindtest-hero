@@ -11,7 +11,9 @@ export default function Home() {
     screenSelection,
     screenSelectionMap,
     soundOptions,
+    score,
     increaseRound,
+    increaseScore,
     loseLife,
     setScreenSelection,
     setSoundOptions,
@@ -25,7 +27,9 @@ export default function Home() {
       screenSelection={screenSelection}
       screenSelectionMap={screenSelectionMap}
       soundOptions={soundOptions}
+      score={score}
       increaseRound={increaseRound}
+      increaseScore={increaseScore}
       loseLife={loseLife}
       setScreenSelection={setScreenSelection}
       setSoundOptions={setSoundOptions}

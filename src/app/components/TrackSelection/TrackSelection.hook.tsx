@@ -10,11 +10,12 @@ export function useTrackSelection() {
     isTrackChosen,
     loading,
     tracks,
+    roundCounter,
     regenerateTracks,
     resetRoundCounter,
     setIsTrackChosen,
   } = useTracksContext();
-  const { lives, round, increaseRound, loseLife, setScreenSelection } = useBlindtestContext();
+  const { lives, round, increaseRound, increaseScore, loseLife, setScreenSelection } = useBlindtestContext();
   const [showRoundBreak, setShowRoundBreak] = useState(false);
 
   function guessTrack(e: SyntheticEvent, trackId: number) {
@@ -22,6 +23,7 @@ export function useTrackSelection() {
 
     if (trackId === chosenTrack?.id) {
       e.currentTarget.classList.add('success');
+      increaseScore(calculateRoundScore());
     } else {
       const chosenTrackElement = document.getElementById(String(chosenTrack?.id));
       
@@ -32,6 +34,10 @@ export function useTrackSelection() {
     }
 
     handleRoundEnd(currentLives);
+  }
+
+  function calculateRoundScore() {
+    return roundCounter * GAME_CONFIG.scoreFactor;
   }
 
   function handleRoundEnd(currentLives: number) {

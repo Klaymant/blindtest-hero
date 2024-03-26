@@ -29,7 +29,9 @@ type BlindtestContextType = {
   screenSelection: ScreenSelection;
   screenSelectionMap: Record<ScreenSelection, ReactNode>;
   soundOptions: SoundOptions;
+  score: number;
   increaseRound: (increase: number) => void;
+  increaseScore: (increase: number) => void;
   loseLife: () => void;
   setScreenSelection: Dispatch<SetStateAction<ScreenSelection>>;
   setSoundOptions: Dispatch<SetStateAction<SoundOptions>>;

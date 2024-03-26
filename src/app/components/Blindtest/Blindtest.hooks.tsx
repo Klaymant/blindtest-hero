@@ -8,6 +8,7 @@ import { GameOver } from "../GameOver/GameOver";
 
 function useBlindtest() {
   const [round, setRound] = useState(1);
+  const [score, setScore] = useState(0);
   const [lives, setLives] = useState(GAME_CONFIG.nbLives);
   const [screenSelection, setScreenSelection] = useState<ScreenSelection>('home');
   const [soundOptions, setSoundOptions] = useState<SoundOptions>({
@@ -24,11 +25,16 @@ function useBlindtest() {
     setRound((prev) => prev + increase);
   }
 
+  function increaseScore(increase: number) {
+    setScore((prev) => prev + increase);
+  }
+
   function loseLife() {
     setLives((prev) => prev - 1);
   }
 
   function resetGame() {
+    setScore(0);
     setRound(1);
     setLives(GAME_CONFIG.nbLives);
   }
@@ -39,7 +45,9 @@ function useBlindtest() {
     screenSelection,
     soundOptions,
     screenSelectionMap,
+    score,
     increaseRound,
+    increaseScore,
     loseLife,
     setScreenSelection,
     setSoundOptions,

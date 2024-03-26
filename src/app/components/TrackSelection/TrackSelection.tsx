@@ -7,6 +7,7 @@ import './TrackSelection.css';
 import { useAnimate } from "@/app/hooks/useAnimate";
 import { RoundBreak } from "../RoundBreak/RoundBreak";
 import { useTrackSelection } from "./TrackSelection.hook";
+import { useBlindtestContext } from "@/app/contexts/BlindtestProvider";
 
 export function TrackSelection() {
   const {
@@ -19,6 +20,7 @@ export function TrackSelection() {
     guessTrack,
     setIsTrackChosen,
   } = useTrackSelection();
+  const { score } = useBlindtestContext();
 
   return (
     <>
@@ -27,7 +29,7 @@ export function TrackSelection() {
       {!loading && !hasEmptyTracks(tracks) && (
         <>
           <Tracks tracks={tracks} isTrackChosen={isTrackChosen} guessTrack={guessTrack} setIsTrackChosen={setIsTrackChosen} />
-          {showRoundBreak && <RoundBreak round={round} lives={lives} />}
+          {showRoundBreak && <RoundBreak round={round} lives={lives} score={score} />}
         </>
       )}
     </>

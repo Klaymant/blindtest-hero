@@ -16,10 +16,13 @@
   }
 
   html {
-    --pop-shadow: var(--primary) 2px 4px 1px;
+    font-size: 16px;
   }
 
   body {
+    --pop-shadow: var(--primary) 2px 4px 1px;
+    --pop-shadow-light: var(--primary) 1px 2px 1px;
+
     color: var(--foreground-rgb);
     background: linear-gradient(
         to bottom,

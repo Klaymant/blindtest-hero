@@ -13,4 +13,8 @@
     align-items: center;
     gap: 10px;
   }
+
+  #play-data #score {
+    font-family: var(--title-font);
+  }
 }
