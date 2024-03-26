@@ -57,7 +57,7 @@ export function useTrackSelection() {
     setTimeout(() => {
       regenerateTracks();
       setShowRoundBreak(false);
-    }, GAME_CONFIG.timeBeforeRoundBreakInMs);
+    }, GAME_CONFIG.timeBeforeNextRoundInMs);
   }
 
   return {
