@@ -68,6 +68,10 @@
     text-decoration: none;
   }
 
+  p + p {
+    margin-top: 1rem;
+  }
+
   button {
     font-family: var(--text-font);
     letter-spacing: 0.8px;
