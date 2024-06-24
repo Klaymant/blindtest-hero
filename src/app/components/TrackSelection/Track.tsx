@@ -15,7 +15,7 @@ export function TrackCard({ track, isTrackChosen, guessTrack, setIsTrackChosen }
   return (
     <button key={track.id} id={String(track.id)} onClick={handleGuessTrack}>
       <img
-        srcSet={`${track.album.cover_medium} 250w`}
+        srcSet={`${track.album.cover_medium} 250w, ${track.album.cover_big} 500w`}
         sizes="(max-width: 500px) 80px, (max-width: 1000px) 150px, (max-width: 1300px) 200px, 250px"
         src={track.album.cover_big}
         alt={coverAltText}
