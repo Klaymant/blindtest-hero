@@ -86,11 +86,10 @@
     cursor: pointer;
     background-color: var(--primary);
     color: white;
-    transition: 0.2s;
   }
 
   button.game-navigation:hover {
-    box-shadow: #ffffff33 0px 20px 30px;
+    outline: solid 2px white;
   }
 
   .end {
