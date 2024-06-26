@@ -52,6 +52,7 @@ function useTrackDisplay({ soundOptions, lives, setSoundOptions, setScreenSelect
       setChosenTrack(randomTracks[chosenTrackId]);
       setAudioPreview(chosenTrackAudioPreview);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tracks, nextRoundFlag]);
 
   useEffect(function playPreview() {
@@ -62,7 +63,7 @@ function useTrackDisplay({ soundOptions, lives, setSoundOptions, setScreenSelect
         audioPreview.pause();
       };
     }
-  }, [audioPreview]);
+  }, [audioPreview, roundTracks]);
 
   useEffect(function countdownRound() {
     if (audioPreview && roundCounter > 0 && !isTrackChosen) {
@@ -88,6 +89,7 @@ function useTrackDisplay({ soundOptions, lives, setSoundOptions, setScreenSelect
           setScreenSelection('game-over');
       }, GAME_CONFIG.timeBeforeRoundEndInMs);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [audioPreview, roundCounter]);
 
   function regenerateTracks() {

@@ -39,6 +39,7 @@ export function TrackSelection() {
 function Tracks({ tracks, isTrackChosen, guessTrack, setIsTrackChosen }: TracksProps) {
   const [sectionRef, appearanceCallback] = useAnimate('appear');
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(appearanceCallback, [tracks]);
 
   return (

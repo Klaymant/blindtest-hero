@@ -21,7 +21,7 @@ function useGameSession({ mute, increaseVolume, decreaseVolume }: GameSessionPar
     return () => {
       document.removeEventListener('keydown', handleEvent);
     };
-  }, [mute]);
+  }, [mute, increaseVolume, decreaseVolume]);
 }
 
 type GameSessionParams = {
