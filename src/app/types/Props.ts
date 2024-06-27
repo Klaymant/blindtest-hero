@@ -1,0 +1,1 @@
+export type Props<T extends (...args: any) => any> = keyof (Parameters<T>)[number];

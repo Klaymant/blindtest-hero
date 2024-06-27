@@ -1,13 +1,51 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { TrackCard } from './Track';
 import './TrackSelection.css';
-
-const meta: Meta<typeof TrackCard> = {
-  component: TrackCard,
-};
+import { StorybookHelper } from '@/app/utils/StorybookHelper';
+import { Props } from '@/app/types/Props';
 
 export const Primary: Story = {
-  args: {
+  args: getBaseArgs(),
+  argTypes: getBaseArgTypes(),
+  render: ({ ...args }) => (
+    <section className='track-display'>
+      <TrackCard {...args} />
+    </section>
+  ),
+};
+
+export const RightChoice: Story = {
+  args: getBaseArgs(),
+  argTypes: getBaseArgTypes(),
+  render: ({ ...args }) => (
+    <section className='track-display success'>
+      <TrackCard {...args} />
+    </section>
+  ),
+};
+
+export const WrongChoice: Story = {
+  args: getBaseArgs(),
+  argTypes: getBaseArgTypes(),
+  render: ({ ...args }) => (
+    <section className='track-display fail'>
+      <TrackCard {...args} />
+    </section>
+  ),
+};
+
+export const RealTrack: Story = {
+  args: getBaseArgs(),
+  argTypes: getBaseArgTypes(),
+  render: ({ ...args }) => (
+    <section className='track-display real-track'>
+      <TrackCard {...args} />
+    </section>
+  ),
+};
+
+function getBaseArgs() {
+  return {
     track: {
       id: 1,
       title: 'Track Title',
@@ -24,17 +62,15 @@ export const Primary: Story = {
     isTrackChosen: false,
     setIsTrackChosen: () => {},
     guessTrack: () => {},
-  },
-  argTypes: {
-    isTrackChosen: { table: { disable: true }},
-    setIsTrackChosen: { table: { disable: true }},
-    guessTrack: { table: { disable: true }},
-  },
-  render: ({ ...args }) => (
-    <section className='track-display'>
-      <TrackCard {...args} />
-    </section>
-  ),
+  };
+};
+
+function getBaseArgTypes() {
+  return StorybookHelper.deactivateProps<Props<typeof TrackCard>>('isTrackChosen', 'setIsTrackChosen', 'guessTrack');
+}
+
+const meta: Meta<typeof TrackCard> = {
+  component: TrackCard,
 };
 
 type Story = StoryObj<typeof TrackCard>;
